@@ -8,5 +8,6 @@ http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/
 
   <include file="version/createIssue.sql" relativeToChangelogFile="true"/>
   <include file="version/createBook.sql" relativeToChangelogFile="true"/>
+  <include file="version/createAuthor.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -9,7 +9,7 @@ CREATE TABLE book (
                        book_id serial PRIMARY KEY,
                        book_name text NOT NULL
 );
---rollback drop table issue;
+--rollback drop table book;
 
 --changeset cinemania:6
 INSERT INTO book(book_name) values ('book_one');
