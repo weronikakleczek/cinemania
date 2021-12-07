@@ -6,7 +6,6 @@ $beige: #DAA89B;
 
 @import "navbar";
 @import "shape-top";
-@import "main";
 @import "popular";
 @import "genres";
 @import "more";
@@ -21,8 +20,6 @@ $beige: #DAA89B;
 }
 
 body {
-    // background-color: $dark-purple-background,url(https://grainy-gradients.vercel.app/noise.svg);
-    background:
-    linear-gradient(to top, $dark-purple-background, rgba($dark-purple-background, 0.95)),
-    url(../assets/other/vectorpaint.svg);
+    background: linear-gradient(to top, $dark-purple-background, rgba($dark-purple-background, 0.95)),
+                url(../assets/other/vectorpaint.svg);
 }
