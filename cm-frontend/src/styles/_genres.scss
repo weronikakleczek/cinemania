@@ -1,0 +1,82 @@
+.genres-container {
+    position: relative;
+    text-align: center;
+    height: 55vh;
+
+    .genres {
+        background-color: $light-purple-background;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+
+        .genre {
+            width: 60%;
+            height: 65%;
+            display: flex;
+            justify-content: center;            
+            align-items: center;
+            font-size: 0.8em;
+            position: relative;
+        }
+
+        .genre::after {
+            content: "";
+            opacity: 0.5;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1; 
+            overflow: hidden;
+            border-radius: 10px;
+            background-position: center;
+        }
+
+        .action::after {
+            background-image: url(../assets/genres/genre-1-action.png);
+        }
+        .romance::after {
+            background-image: url(../assets/genres/genre-2-romance.png);
+        }
+        .thriller::after {
+            background-image: url(../assets/genres/genre-3-thriller.png);
+        }
+        .fantasy::after {
+            background-image: url(../assets/genres/genre-4-fantasy.png);
+        }
+        .comedy::after {
+            background-image: url(../assets/genres/genre-5-comedy.png);
+        }
+        .horror::after {
+            background-image: url(../assets/genres/genre-6-horror.png);
+        }
+
+
+    }
+
+    .tv {
+        position: absolute;
+        right: 0;
+        bottom: 100%;
+    }
+
+    .genres-header {
+        position: absolute;
+        left: 10vh;
+        top: -10vh;
+        background-color: rgba($beige, 0.8);
+        height: 12vh;
+        width: 60vh;
+        border-radius: 1vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            color: black;
+        }
+    }
+}

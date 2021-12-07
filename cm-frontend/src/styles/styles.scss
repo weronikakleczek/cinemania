@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Rufina&display=swap');
+
+$dark-purple-background: #2C0E37;
+$light-purple-background: rgba(#C4C4C4, 0.2);
+$beige: #DAA89B;
+
+@import "navbar";
+@import "shape-top";
+@import "main";
+@import "popular";
+@import "genres";
+@import "more";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Rufina', serif;
+}
+
+body {
+    // background-color: $dark-purple-background,url(https://grainy-gradients.vercel.app/noise.svg);
+    background:
+    linear-gradient(to top, $dark-purple-background, rgba($dark-purple-background, 0.95)),
+    url(../assets/other/vectorpaint.svg);
+}

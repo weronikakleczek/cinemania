@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Rufina&display=swap");
+nav {
+  width: 90%;
+  margin: 0px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 2em;
+  height: 20vh;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+  list-style: none;
+  padding-top: 30px;
+}
+
+nav #logo-container {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+  padding-top: 25px;
+  z-index: 1;
+}
+
+.beige {
+  color: #DAA89B;
+}
+
+.top-shape-container {
+  position: relative;
+  width: 100%;
+}
+
+.top-shape-container img {
+  position: absolute;
+  left: -30vw;
+  top: -50vh;
+  z-index: 0;
+}
+
+.main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 35vh;
+}
+
+.main-container h1 {
+  font-size: 4.5em;
+  font-weight: lighter;
+}
+
+.popular-container {
+  height: 65vh;
+  width: 100vw;
+  position: relative;
+  text-align: center;
+  background-color: rgba(196, 196, 196, 0.2);
+  z-index: 0;
+  margin-bottom: 35vh;
+  margin-top: 5vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 5fr 1fr;
+      grid-template-columns: 1fr 5fr 1fr;
+  -ms-grid-rows: 1fr 6fr 1fr;
+      grid-template-rows: 1fr 6fr 1fr;
+}
+
+.popular-container h1 {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  padding-top: 3vh;
+}
+
+.popular-container .popular-movies {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  height: 95%;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popular-container .balls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
+
+.popular-container .balls .ball {
+  background-color: rgba(221, 221, 221, 0.5);
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin: 0px 10px;
+}
+
+.popular-container .balls .active {
+  background: #DDDDDD;
+}
+
+.genres-container {
+  position: relative;
+  text-align: center;
+  height: 55vh;
+}
+
+.genres-container .genres {
+  background-color: rgba(196, 196, 196, 0.2);
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+
+.genres-container .genres .genre {
+  width: 60%;
+  height: 65%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.8em;
+  position: relative;
+}
+
+.genres-container .genres .genre::after {
+  content: "";
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: 10px;
+  background-position: center;
+}
+
+.genres-container .genres .action::after {
+  background-image: url(../assets/genres/genre-1-action.png);
+}
+
+.genres-container .genres .romance::after {
+  background-image: url(../assets/genres/genre-2-romance.png);
+}
+
+.genres-container .genres .thriller::after {
+  background-image: url(../assets/genres/genre-3-thriller.png);
+}
+
+.genres-container .genres .fantasy::after {
+  background-image: url(../assets/genres/genre-4-fantasy.png);
+}
+
+.genres-container .genres .comedy::after {
+  background-image: url(../assets/genres/genre-5-comedy.png);
+}
+
+.genres-container .genres .horror::after {
+  background-image: url(../assets/genres/genre-6-horror.png);
+}
+
+.genres-container .tv {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+}
+
+.genres-container .genres-header {
+  position: absolute;
+  left: 10vh;
+  top: -10vh;
+  background-color: rgba(218, 168, 155, 0.8);
+  height: 12vh;
+  width: 60vh;
+  border-radius: 1vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.genres-container .genres-header h2 {
+  color: black;
+}
+
+.more-container {
+  height: 15vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+  font-family: 'Rufina', serif;
+}
+
+body {
+  background: -webkit-gradient(linear, left bottom, left top, from(#2C0E37), to(rgba(44, 14, 55, 0.95))), url(../assets/other/vectorpaint.svg);
+  background: linear-gradient(to top, #2C0E37, rgba(44, 14, 55, 0.95)), url(../assets/other/vectorpaint.svg);
+}
+/*# sourceMappingURL=styles.css.map */
