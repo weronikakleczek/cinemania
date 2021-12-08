@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Rufina&display=swap');
 
 $dark-purple-background: #2C0E37;
-$light-purple-background: rgba(#C4C4C4, 0.2);
+$light-purple-background: #C4C4C4;
+$light-purple-transparent-background: rgba(#C4C4C4, 0.2);
 $beige: #DAA89B;
 
 @import "navbar";
@@ -9,6 +10,9 @@ $beige: #DAA89B;
 @import "popular";
 @import "genres";
 @import "more";
+@import "top";
+@import "movies";
+@import "login";
 
 
 * {
@@ -20,6 +24,11 @@ $beige: #DAA89B;
 }
 
 body {
+    // background: $dark-purple-background;
     background: linear-gradient(to top, $dark-purple-background, rgba($dark-purple-background, 0.95)),
                 url(../assets/other/vectorpaint.svg);
+}
+
+a {
+    text-decoration: none;
 }
