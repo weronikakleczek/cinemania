@@ -1,0 +1,61 @@
+.top-container {
+    text-align: center;
+    position: relative;
+    
+
+    .single-movie {
+        height: 30vh;
+        background: rgba($light-purple-background, 0.4);
+        width: 90%;
+        margin: 2vh auto;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 3fr 6fr;
+        grid-template-rows: 8fr 2fr;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            color: $beige;
+        }
+
+        .title-description {
+            h2 {
+                font-size: 3em;
+                color: rgba(#FFFFFF, 0.9);
+            }
+            p {
+                margin: 2vh;
+                height: 5vh;
+                overflow: hidden;
+                color: rgba(#DDDDDD, 0.5);
+            }
+        }
+
+        .poster-container {
+            margin: 2vh auto;
+            img {
+                width: 15vw;
+                height: 21vh;
+                object-fit:contain;
+            }
+        }
+        .score {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba($color: $light-purple-background, $alpha: 0.8);
+            height: 20%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .star-container, h3 {
+                margin: 0 2vh;
+            }
+            h3 {
+                font-size: 2em;
+            }
+        }
+    }
+}

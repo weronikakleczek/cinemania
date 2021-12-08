@@ -1,18 +1,23 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/other/cinemania-logo.png'
+import TopShape from './TopShape';
 
 const Navbar = () => {
     return (
+        <div className="navbar">
+            <TopShape />
             <nav>
                 <div id="logo-container">
-                    <img src={logo} alt="logo" />
+                    <Link to="/"><img src={logo} alt="logo" /></Link>
                 </div>
                 <ul>
-                    <li className="white">Filmy</li>
-                    <li className="white">Seriale</li>
-                    <li className="white">Top 100</li>
-                    <li className="beige">Zaloguj</li>
+                    <Link to="/movies"><li className="white">Filmy</li></Link>
+                    <Link to="/tvshows"><li className="white">Seriale</li></Link>
+                    <Link to="/top"><li className="white">Top 100</li></Link>
+                    <Link to="/login"><li className="beige">Zaloguj</li></Link>
                 </ul>
             </nav>
+        </div>
     );
 }
 
