@@ -41,13 +41,14 @@ nav #logo-container {
 .top-shape-container {
   position: relative;
   width: 100%;
+  height: auto;
 }
 
 .top-shape-container img {
   position: absolute;
-  left: -30vw;
-  top: -60vh;
-  z-index: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
 }
 
 .popular-container {
