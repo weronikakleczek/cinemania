@@ -321,6 +321,44 @@ nav #logo-container {
   font-size: 2em;
 }
 
+.search-container {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+}
+
+.search-container .search-bar input {
+  height: 8vh;
+  width: 100vh;
+  margin-right: 100vh;
+  left: 10vh;
+  top: 3vh;
+  margin-bottom: 8vh;
+  position: relative;
+  padding-top: 1vh;
+  background: rgba(196, 196, 196, 0.4);
+  color: rgba(255, 255, 255, 0.5);  
+  text-align: left;
+  border: none;
+  outline: none;
+  z-index: 3;
+}
+
+.search-container .search-filter {
+  height: 8vh;
+  width: 170vh;
+  margin-right: 100vh;
+  margin-bottom: 5vh;
+  top: 2vh;
+  padding-top: 2vh;
+  background: rgba(252, 239, 195, 0.8);
+}
+
+.search-container .search-filter h2 {
+  color: black;
+}
+
 .movies-container {
   text-align: center;
   position: relative;

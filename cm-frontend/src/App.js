@@ -5,6 +5,7 @@ import Top from './components/Top';
 import Movies from './components/Movies';
 import TvShows from './components/TvShows';
 import Login from './components/Login';
+import Search from './components/Search';
 import './styles/styles.css'
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/movies" element={<Movies />} />
+        <Route exact path="/search" element={<Search/>} />
         <Route exact path="/tvshows" element={<TvShows />} />
         <Route exact path="/top" element={<Top />} />
         <Route exact path="/login" element={<Login />} />
