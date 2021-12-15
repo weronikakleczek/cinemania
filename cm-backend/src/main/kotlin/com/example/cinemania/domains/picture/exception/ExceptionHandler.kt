@@ -1,4 +1,4 @@
-package com.example.cinemania.exception
+package com.example.cinemania.domains.picture.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
