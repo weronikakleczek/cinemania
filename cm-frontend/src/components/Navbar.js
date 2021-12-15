@@ -19,12 +19,8 @@ const Navbar = () => {
                 <ul>
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
-<<<<<<< HEAD
-                    <Link to="/login"><li className="beige">{ user ? user : 'Zaloguj'}</li></Link>
-=======
                     <Link to="/register"><li className="yellow">Zarejestruj</li></Link>
                     <Link to="/login"><li className="beige">Zaloguj</li></Link>
->>>>>>> 97d045c (add register to navbar)
                 </ul>
             </nav>
         </div>
