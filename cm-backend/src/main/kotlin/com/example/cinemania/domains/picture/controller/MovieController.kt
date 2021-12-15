@@ -1,9 +1,9 @@
-package com.example.cinemania.controller
+package com.example.cinemania.domains.picture.controller
 
-import com.example.cinemania.exception.InvalidMovieIdException
-import com.example.cinemania.exception.InvalidQueryException
-import com.example.cinemania.model.Movie
-import com.example.cinemania.model.MovieList
+import com.example.cinemania.domains.picture.exception.InvalidMovieIdException
+import com.example.cinemania.domains.picture.exception.InvalidQueryException
+import com.example.cinemania.domains.picture.model.Movie
+import com.example.cinemania.domains.picture.model.MovieList
 import com.google.gson.Gson
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -24,7 +24,7 @@ class MovieController(
         .build()
 
     @GetMapping("/{movieId}")
-    fun getMovieById(@PathVariable("movieId") movieId: String): Movie  {
+    fun getMovieById(@PathVariable("movieId") movieId: String): Movie {
         try {
             val movie = restTemplate.getForEntity("$defaultUri/movie/$movieId?api_key=$apiKey", String::class.java)
             return gson.fromJson(movie.getBody(), Movie::class.java)
