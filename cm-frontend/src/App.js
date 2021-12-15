@@ -25,6 +25,7 @@ const App = () => {
           <Route exact path="/tvshows" element={<TvShows />} />
           <Route exact path="/top" element={<Top />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
         </Routes>
       </UserContext.Provider>
     </Router>
