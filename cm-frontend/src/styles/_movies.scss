@@ -1,6 +1,7 @@
 .movies-container {
     text-align: center;
     position: relative;
+    width: 100vh;
     .movie-list {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;

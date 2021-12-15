@@ -40,13 +40,11 @@ const Search = () => {
         <div className="movies-container">
             <div className="search-container">
                 <div className="search-bar"> 
-                    <form>
                     <input
                         type="text"
                         placeholder="Wprowadź tytuł, rezysera lub słowo kluczowe..."
                         onChange={ e => setQuery(e.target.value) }
                     /> 
-                    </form>
                 </div>
                 <div className="search-filter"> 
                     <h2>Gatunek</h2>
