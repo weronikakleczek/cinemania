@@ -19,4 +19,7 @@ class UserController(val userService: UserService) {
         println(userRegistrationDto)
         return ResponseEntity.ok(userService.registerUser(userRegistrationDto))
     }
+
+    @GetMapping("/admin")
+    fun getAdminPanel(): ResponseEntity<String> = ResponseEntity.ok("This is an admin panel.")
 }
