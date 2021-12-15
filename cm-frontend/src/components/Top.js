@@ -6,9 +6,6 @@ import star from '../assets/icons/star.png';
 const Top = () => {
 
     const [movieList, setMovieList] = useState(null);
-    const [error, setError] = useState(null);
-    const imageUrl = 'https://image.tmdb.org/t/p'
-
 
     useEffect(() => {
 
@@ -26,7 +23,7 @@ const Top = () => {
             console.log(data);
         })
         .catch(e => {
-            setError(e.message);
+            console.log(e.message);
         });
     }, [])
 
