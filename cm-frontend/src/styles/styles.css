@@ -324,6 +324,7 @@ nav #logo-container {
 .movies-container {
   text-align: center;
   position: relative;
+  width: 100vh;
 }
 
 .movies-container .movie-list {
@@ -432,37 +433,22 @@ nav #logo-container {
   width: 6vw;
 }
 
-.search-filter {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  padding-left: 200px;
-  margin-right: 100px;
-}
-
-.search-filter h2 {
-  margin: 0 auto;
-}
-
-.search-container .search-filter h2 {
-  color: black;
-}
-
 .search-container {
   position: relative;
+  width: 100vh;
+  margin-left: 40vh;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
 }
 
+.search-container .search-bar {
+  width: 100vh;
+}
+
 .search-container .search-bar input {
   height: 8vh;
   width: 100vh;
-  margin-right: 100vh;
   left: 10vh;
   top: 3vh;
   margin-bottom: 8vh;
@@ -480,12 +466,24 @@ nav #logo-container {
 
 .search-container .search-filter {
   height: 8vh;
-  width: 170vh;
-  margin-right: 100vh;
+  width: 130vh;
   margin-bottom: 5vh;
+  margin-right: 50vh;
   top: 2vh;
   padding-top: 2vh;
   background: rgba(252, 239, 195, 0.8);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.search-container .search-filter h2 {
+  margin: 0 auto;
+  color: black;
 }
 
 * {
