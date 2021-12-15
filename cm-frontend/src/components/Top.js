@@ -6,9 +6,6 @@ import star from '../assets/icons/star.png';
 const Top = () => {
 
     const [movieList, setMovieList] = useState(null);
-    const [error, setError] = useState(null);
-    const imageUrl = 'https://image.tmdb.org/t/p'
-
 
     useEffect(() => {
 
@@ -26,7 +23,7 @@ const Top = () => {
             console.log(data);
         })
         .catch(e => {
-            setError(e.message);
+            console.log(e.message);
         });
     }, [])
 
@@ -45,7 +42,7 @@ const Top = () => {
                                 <img src={ `https://image.tmdb.org/t/p/original/${movie.poster_path}` } className="poster" alt="movie"/>
                             </div>
                             <div className="title-description">
-                                <h2>{ movie.original_title}</h2>
+                                <h2>{ movie.title}</h2>
                                 <p>{ movie.overview }</p>
                             </div>
                             <div className="score">
