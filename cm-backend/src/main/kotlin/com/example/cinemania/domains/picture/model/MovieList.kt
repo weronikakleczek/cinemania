@@ -1,4 +1,4 @@
-package com.example.cinemania.model
+package com.example.cinemania.domains.picture.model
 
 import com.google.gson.annotations.SerializedName
 
