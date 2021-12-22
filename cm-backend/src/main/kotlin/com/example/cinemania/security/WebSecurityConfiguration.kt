@@ -3,6 +3,7 @@ package com.example.cinemania.security
 import com.example.cinemania.domains.user.repository.UserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -19,7 +20,7 @@ class WebSecurityConfiguration(private val userRepository: UserRepository): WebS
         http
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/movie/**", "/user/register").permitAll()
+            .antMatchers("/movie/**", "/user/register", "/authenticate").permitAll()
             .antMatchers("/user/admin").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
@@ -42,5 +43,10 @@ class WebSecurityConfiguration(private val userRepository: UserRepository): WebS
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
+    }
+
+    @Bean
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
     }
 }
