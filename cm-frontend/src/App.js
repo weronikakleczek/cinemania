@@ -7,6 +7,7 @@ import TvShows from './components/TvShows';
 import Login from './components/Login';
 import Search from './components/Search';
 import './styles/styles.css'
+import Register from './components/Register';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route exact path="/tvshows" element={<TvShows />} />
         <Route exact path="/top" element={<Top />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

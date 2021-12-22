@@ -13,6 +13,7 @@ const Navbar = () => {
                 <ul>
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
+                    <Link to="/register"><li className="yellow">Zarejestruj</li></Link>
                     <Link to="/login"><li className="beige">Zaloguj</li></Link>
                 </ul>
             </nav>

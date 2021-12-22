@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import movie from '../assets/movies/movie-1.png';
 import star from '../assets/icons/star.png';
 
 

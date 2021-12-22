@@ -4,7 +4,7 @@
     
 
     .single-movie {
-        height: 30vh;
+        height: 35vh;
         background: rgba($light-purple-background, 0.4);
         width: 90%;
         margin: 2vh auto;
@@ -14,6 +14,7 @@
         grid-template-rows: 8fr 2fr;
         align-items: center;
         justify-content: center;
+        z-index: 1;
 
         h1 {
             color: $beige;
@@ -45,13 +46,13 @@
             bottom: 0;
             left: 0;
             background: rgba($color: $light-purple-background, $alpha: 0.8);
-            height: 20%;
+            height: 25%;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             .star-container, h3 {
-                margin: 0 2vh;
+                margin: 0 2vw;
             }
             h3 {
                 font-size: 2em;
