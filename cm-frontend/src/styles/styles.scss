@@ -4,6 +4,7 @@ $dark-purple-background: #2C0E37;
 $light-purple-background: #C4C4C4;
 $light-purple-transparent-background: rgba(#C4C4C4, 0.2);
 $beige: #DAA89B;
+$yellow: rgb(252, 241, 207);
 
 @import "navbar";
 @import "shape-top";
@@ -11,7 +12,6 @@ $beige: #DAA89B;
 @import "genres";
 @import "more";
 @import "top";
-@import "movies";
 @import "login";
 @import "search";
 @import "register";
