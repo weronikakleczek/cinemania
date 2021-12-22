@@ -1,8 +1,14 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/other/cinemania-logo.png'
 import TopShape from './TopShape';
+import UserContext from './UserContext';
 
 const Navbar = () => {
+
+    const {user, setUser} = useContext(UserContext);
+
+
     return (
         <div className="navbar">
             <TopShape />
@@ -14,7 +20,7 @@ const Navbar = () => {
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
                     <Link to="/register"><li className="yellow">Zarejestruj</li></Link>
-                    <Link to="/login"><li className="beige">Zaloguj</li></Link>
+                    <Link to="/login"><li className="beige">{ user ? user : 'Zaloguj'}</li></Link>
                 </ul>
             </nav>
         </div>
