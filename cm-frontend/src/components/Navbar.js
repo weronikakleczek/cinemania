@@ -31,6 +31,7 @@ const Navbar = () => {
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <Link to="/register"><li className="yellow">Zarejestruj</li></Link>
 <<<<<<< HEAD
                     <Link to="/login"><li className="beige">{ user ? user : 'Zaloguj'}</li></Link>
@@ -38,6 +39,8 @@ const Navbar = () => {
                     <Link to="/login"><li className="beige">Zaloguj</li></Link>
 >>>>>>> 3ce22fa (fix search ui)
 =======
+=======
+>>>>>>> cae058d9f455d71da230f9f643f790a5b549a479
                     {
                         user ?
                         <>
@@ -51,7 +54,10 @@ const Navbar = () => {
                         </>
                     }
 
+<<<<<<< HEAD
 >>>>>>> 02b3ba5 (connected security with frontend)
+=======
+>>>>>>> cae058d9f455d71da230f9f643f790a5b549a479
                 </ul>
             </nav>
         </div>
