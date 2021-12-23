@@ -8,10 +8,7 @@ import Login from './components/Login';
 import Search from './components/Search';
 import UserContext from './components/UserContext';
 import './styles/styles.css'
-<<<<<<< HEAD
-=======
 import Register from './components/Register';
->>>>>>> c5d7cc2 (started adding jwt)
 import { useState } from 'react';
 import Admin from './components/Admin';
 
