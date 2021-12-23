@@ -13,8 +13,8 @@ class JwtUtil {
 
     private val secret: String = "secret_to_be_changed_later"
 
-    fun getUsernameFromToken(token: String) = getClaimFromToken(token, Claims::getSubject)
-    fun getExpirationDateFromToken(token: String) = getClaimFromToken(token, Claims::getExpiration)
+    fun getUsernameFromToken(token: String): String = getClaimFromToken(token, Claims::getSubject)
+    fun getExpirationDateFromToken(token: String): Date = getClaimFromToken(token, Claims::getExpiration)
 
     fun generateToken(userDetails: UserDetails): String {
         val claims: Map<String, Any> = HashMap()
@@ -39,7 +39,7 @@ class JwtUtil {
 
     private fun isTokenExpired(token: String): Boolean {
         val expiration = getExpirationDateFromToken(token)
-        return expiration.before(Date())
+        return expiration.before(Date(System.currentTimeMillis()))
     }
 
     private fun createToken(claims: Map<String, Any>, subject: String): String =

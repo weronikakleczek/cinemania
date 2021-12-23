@@ -13,6 +13,7 @@ import './styles/styles.css'
 import Register from './components/Register';
 >>>>>>> c5d7cc2 (started adding jwt)
 import { useState } from 'react';
+import Admin from './components/Admin';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/top" element={<Top />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/admin" element={<Admin />} />
         </Routes>
       </UserContext.Provider>
     </Router>

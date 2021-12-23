@@ -548,6 +548,14 @@ nav #logo-container {
   width: 6vw;
 }
 
+.admin {
+  right: 50%;
+  bottom: 50%;
+  -webkit-transform: translate(50%, 50%);
+          transform: translate(50%, 50%);
+  position: absolute;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -558,8 +566,7 @@ nav #logo-container {
 }
 
 body {
-  background: -webkit-gradient(linear, left bottom, left top, from(#2C0E37), to(rgba(44, 14, 55, 0.95))), url(../assets/other/vectorpaint.svg);
-  background: linear-gradient(to top, #2C0E37, rgba(44, 14, 55, 0.95)), url(../assets/other/vectorpaint.svg);
+  background: #2C0E37;
 }
 
 a {
