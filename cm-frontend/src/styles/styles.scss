@@ -15,6 +15,7 @@ $yellow: rgb(252, 241, 207);
 @import "login";
 @import "search";
 @import "register";
+@import "admin";
 
 
 * {
@@ -26,9 +27,7 @@ $yellow: rgb(252, 241, 207);
 }
 
 body {
-    // background: $dark-purple-background;
-    background: linear-gradient(to top, $dark-purple-background, rgba($dark-purple-background, 0.95)),
-                url(../assets/other/vectorpaint.svg);
+    background: $dark-purple-background;
 }
 
 a {

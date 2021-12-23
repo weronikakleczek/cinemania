@@ -22,4 +22,8 @@ class UserController(val userService: UserService) {
 
     @GetMapping("/admin")
     fun getAdminPanel(): ResponseEntity<String> = ResponseEntity.ok("This is an admin panel.")
+
+
+    @GetMapping("/only_user")
+    fun getUserPanel(): ResponseEntity<String> = ResponseEntity.ok("This is an user panel.")
 }
