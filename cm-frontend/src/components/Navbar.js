@@ -27,11 +27,12 @@ const Navbar = () => {
                 </div>
                 <ul>
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
+                    <Link to="/filter"><li className="white">Filtruj</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
                     {
                         user ?
                         <>
-                        <Link to="/admin"><li className="yellow">Admin</li></Link>
+                        <Link to="/profile"><li className="yellow">{user}</li></Link>
                         <Link to="/logout" onClick={handleLogout}><li className="beige">Wyloguj</li></Link>
                         </> 
                         :

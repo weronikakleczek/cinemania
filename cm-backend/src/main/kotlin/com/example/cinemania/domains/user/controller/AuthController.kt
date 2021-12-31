@@ -1,5 +1,8 @@
 package com.example.cinemania.domains.user.controller
 
+import com.example.cinemania.domains.user.model.User
+import com.example.cinemania.domains.user.model.UserRegistrationDto
+import com.example.cinemania.domains.user.service.UserService
 import com.example.cinemania.security.CinemaniaUserDetailsService
 import com.example.cinemania.security.jwt.JwtAuthRequest
 import com.example.cinemania.security.jwt.JwtAuthResponse
@@ -16,7 +19,8 @@ import org.springframework.web.bind.annotation.*
 class AuthController(
     val authenticationManager: AuthenticationManager,
     val cinemaniaUserDetailsService: CinemaniaUserDetailsService,
-    val jwtUtil: JwtUtil
+    val jwtUtil: JwtUtil,
+    val userService: UserService
 ) {
 
     @PostMapping("/authenticate")
@@ -37,5 +41,12 @@ class AuthController(
         val jwtToken = jwtUtil.generateToken(userDetails)
         return ResponseEntity.ok(JwtAuthResponse(jwtToken))
     }
+
+    @PostMapping("/register")
+    fun registerUser(@RequestBody userRegistrationDto: UserRegistrationDto): ResponseEntity<User> {
+        return ResponseEntity.ok(userService.registerUser(userRegistrationDto))
+    }
+
+
 
 }

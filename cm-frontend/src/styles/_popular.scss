@@ -6,7 +6,7 @@
     text-align: center;
     background-color: rgba($color: $light-purple-transparent-background, $alpha: 0.2);
     margin-bottom:35vh;
-    margin-top: 5vh;
+    margin-top: 15vh;
 
 
     display: grid;
@@ -51,4 +51,42 @@
             background: #DDDDDD;
         }
     }
+
+}
+
+.trending-pictures {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5px;
+    height: 40vh;
+
+    .picture-container {
+        
+        width: auto;
+        margin: 2vh auto;
+        opacity: 0;
+        transition-duration: 1.5s;
+
+
+        .picture {
+            width: 20vw;
+            height: 28.5vh;
+            object-fit:contain;
+        }
+    }
+
+    .arrow {
+        font-size: 10em;
+    }
+
+}
+
+.picture-container.active {
+    opacity: 1;
+    transition-duration: 1.5s;
+    transform: scale(1.1);
+    transition-timing-function: ease-in-out;
+    
 }

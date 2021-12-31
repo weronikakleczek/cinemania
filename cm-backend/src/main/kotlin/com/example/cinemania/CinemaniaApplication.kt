@@ -2,7 +2,9 @@ package com.example.cinemania
 
 import com.example.cinemania.domains.user.model.Role
 import com.example.cinemania.domains.user.model.User
+import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.repository.UserRepository
+import com.example.cinemania.domains.user.repository.WatchedMovieRepository
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.boot.runApplication
@@ -23,6 +25,7 @@ fun main(args: Array<String>) {
 
 @Component
 class ApplicationStart(val userRepository: UserRepository,
+                       val watchedMovieRepository: WatchedMovieRepository,
                        val passwordEncoder: PasswordEncoder) {
     @EventListener(ApplicationReadyEvent::class)
     fun addAdminsToDb() {
@@ -33,7 +36,6 @@ class ApplicationStart(val userRepository: UserRepository,
             passwordEncoder.encode("admin"),
             "first",
             "last",
-            "123456789",
             Instant.now(),
             mutableSetOf(Role.ADMIN)
         )
@@ -44,11 +46,19 @@ class ApplicationStart(val userRepository: UserRepository,
             passwordEncoder.encode("user"),
             "first",
             "last",
-            "123456789",
             Instant.now(),
             mutableSetOf(Role.USER)
         )
 
+        val watchedMovie = WatchedMovie(
+            1L,
+            user,
+            123L,
+            12,
+            "Good!"
+        )
+
         userRepository.saveAll(listOf(admin, user))
+        watchedMovieRepository.save(watchedMovie)
     }
 }

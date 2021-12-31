@@ -1,3 +1,5 @@
+package com.example.cinemania.domains.picture.model
+
 import com.google.gson.annotations.SerializedName
 
 data class Spoken_languages (

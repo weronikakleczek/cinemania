@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Auth from "../auth/Auth";
-import UserContext from "./UserContext";
+import Auth from "../../auth/Auth";
+import UserContext from "../UserContext";
 
 const Login = () => {
 
@@ -14,8 +14,8 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         console.log('Logged as:', login);
+        Auth.login(login, password)
         setUser(login);
-        Auth.login(login, password);
         navigate('/');
     }
 

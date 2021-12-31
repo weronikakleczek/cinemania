@@ -5,9 +5,11 @@
 
     img {
         position: absolute;
+        width: 45vw;
+        height: auto;
         left: 0;
-        top: 0;
-        z-index: 1;
+        top: -5vh;
+        z-index: 1; 
     }
 }
 

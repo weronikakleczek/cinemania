@@ -4,6 +4,7 @@ $dark-purple-background: #2C0E37;
 $light-purple-background: #C4C4C4;
 $light-purple-transparent-background: rgba(#C4C4C4, 0.2);
 $beige: #DAA89B;
+$dark-beige: #a9957b;
 $yellow: rgb(252, 241, 207);
 
 @import "navbar";
@@ -16,7 +17,9 @@ $yellow: rgb(252, 241, 207);
 @import "search";
 @import "register";
 @import "admin";
-
+@import "single_picture";
+@import "single_movie_page";
+@import "profile";
 
 * {
     margin: 0;

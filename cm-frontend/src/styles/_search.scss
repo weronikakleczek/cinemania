@@ -2,8 +2,7 @@
   width: 100vw;
 
   .search-container {
-    padding-left: 25vw;
-    padding-right: 10vw;
+    padding: 10vh 10vw 12vh 35vh;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -12,9 +11,10 @@
       width: 80%;
 
       input {
+        position: relative;
         height: 8vh;
         width: 100%;
-        top: 3vh;
+        top: 5vh;
         margin-bottom: 8vh;
         position: relative;
         padding-top: 1vh;
@@ -30,47 +30,87 @@
     }
   
     .search-filter {
+      position: relative;
       height: 8vh;
       width: 100%;
       margin-bottom: 10vh;
-      top: 2vh;
+      top: 5vh;
       padding-top: 2vh;
-      background: rgba(252, 239, 195, 0.8);
+      background: rgb(252, 239, 195);
       display: flex;
       flex-direction: row;
+      justify-content: flex-end;
       z-index: 1;
   
-      h2 {
-          margin: 0 auto;
+      .filter {
+        margin: 0 auto;
+        h2 {
           color: black;
-  
+        }
+        .single-filter{
+          display: none;
+        }
+
+      }
+      .filter:hover  {
+        .single-filter {
+          display: block;
+          color: #000;
+          background: rgb(252, 239, 195);
+          font-size: 0.8em;
+          padding: 1vh 0;
+          text-align: center;      
+          button {
+            color: #000;
+            border: none;
+            outline: none;
+            background: inherit;
+            width: 100%;
+            height: 100%;
+
+          }    
+        }
+        .enabled {
+          background-color: $dark-beige;  
+        }
+        
       }
     }
   }
+
+
+
   
   
 
   .movie-list {
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: 0 9vw;
   }
 
   .single-movie {
-      height: 50vh;
+      height: 65vh;
       background: rgba($light-purple-background, 0.4);
       width: 90%;
       margin: 1vh auto;
       position: relative;
 
+      h2 {
+        height: 12vh;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .poster-container {
           margin: 2vh auto;
           img {
-              width: 20vw;
-              height: 28.5vh;
+              height: 34vh;
+              width: 26vh;
               object-fit:contain;
           }
+
       }
       .score {
           position: absolute;
@@ -89,6 +129,17 @@
               font-size: 2em;
           }
       }
+  }
+
+  .more-button {
+    margin: 10vh auto;
+    padding: 2vh 5vw;
+    display: block;
+    background-color: rgba($light-purple-background, 0.4);
+    border-radius: 10px;
+    color: $beige;
+    font-size: 1.5em;
+    font-weight: bold;
   }
 }
 
