@@ -8,11 +8,10 @@ import UserContext from './components/UserContext';
 import './styles/styles.css'
 import Register from './components/user/Register';
 import { useState } from 'react';
-import Admin from './components/Admin';
 import Filter from './components/filter/Filter';
 import SingleMovie from './components/pictures/SingleMovie';
 import SingleTvShow from './components/pictures/SingleTvShow';
-import Profile from './components/user/Profile';
+import Profile from './components/user/profile/Profile';
 
 const App = () => {
 

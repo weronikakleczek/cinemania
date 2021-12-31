@@ -35,6 +35,14 @@ const getWatchedMovies = (username) => {
   return axios.get(API_URL + `watched/movie/all/${username}`, {});
 }
 
+const addTvShowToWatched = (username, tvShowId) => {
+  return axios.post(API_URL + `watched/tv/add/${username}/${tvShowId}`, {}, {});
+}
+
+const getWatchedTvShows = (username) => {
+  return axios.get(API_URL + `watched/tv/all/${username}`, {});
+}
+
 
 const ApiCall = {
     getTrending,
@@ -44,7 +52,9 @@ const ApiCall = {
     getSinglePicture,
     getUserInfo,
     addMovieToWatched,
-    getWatchedMovies
+    getWatchedMovies,
+    addTvShowToWatched,
+    getWatchedTvShows
 };
 
 export default ApiCall;

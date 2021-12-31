@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import ApiCall from '../../api/ApiCall';
 import star from '../../assets/icons/star.png';
 import not_found from '../../assets/other/404-image-not-found.jpg';
+import UserContext from '../UserContext';
 
 const SingleTvShow = () => {
     
     const { id } = useParams();
+    const {user, setUser} = useContext(UserContext);
     const [tv, setTv] = useState(null);
 
 
@@ -26,6 +28,11 @@ const SingleTvShow = () => {
 
     }, [])
 
+    const handleAddToWatched = () => {
+        ApiCall.addTvShowToWatched(user, id);
+        console.log(`Adding  ${tv} to user ${user}`)
+    }
+
     return (
         <>
             {tv &&
@@ -37,6 +44,7 @@ const SingleTvShow = () => {
                             className="background" 
                             alt="movie"/> 
                     </div>
+                    { user && <button onClick={handleAddToWatched}>Dodaj do obejrzanych!</button> }
                     <div className="poster-container">
                         <img 
                         src={ `https://image.tmdb.org/t/p/original/${tv.poster_path}` } 

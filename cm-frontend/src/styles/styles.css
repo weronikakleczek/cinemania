@@ -536,66 +536,6 @@ nav #logo-container {
   background-color: #a9957b;
 }
 
-.movies-container .movie-list {
-  text-align: center;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin: 0 9vw;
-}
-
-.movies-container .single-movie {
-  height: 65vh;
-  background: rgba(196, 196, 196, 0.4);
-  width: 90%;
-  margin: 1vh auto;
-  position: relative;
-}
-
-.movies-container .single-movie h2 {
-  height: 12vh;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.movies-container .single-movie .poster-container {
-  margin: 2vh auto;
-}
-
-.movies-container .single-movie .poster-container img {
-  height: 34vh;
-  width: 26vh;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-
-.movies-container .single-movie .score {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: rgba(196, 196, 196, 0.8);
-  height: 20%;
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.movies-container .single-movie .score .star-container, .movies-container .single-movie .score h3 {
-  margin: 0 2vh;
-}
-
-.movies-container .single-movie .score h3 {
-  font-size: 2em;
-}
-
 .movies-container .more-button {
   margin: 10vh auto;
   padding: 2vh 5vw;
@@ -764,6 +704,131 @@ nav #logo-container {
 .profile-container {
   text-align: center;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-container .nav-and-content {
+  background-color: rgba(196, 196, 196, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 5vh;
+  min-height: 70vh;
+}
+
+.profile-container .nav-and-content .profile-nav {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  background-color: #C4C4C4;
+  border-bottom-right-radius: 40px;
+  border-top-right-radius: 40px;
+  height: 70vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  overflow: hidden;
+}
+
+.profile-container .nav-and-content .profile-nav .option {
+  outline: none;
+  border: none;
+  background: none;
+  height: 100%;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  color: #4b0747;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.profile-container .nav-and-content .profile-nav .option:hover {
+  -webkit-transition: 1s;
+  transition: 1s;
+  background-color: black;
+  color: #eba0e6;
+}
+
+.profile-container .nav-and-content .single-option {
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+}
+
+.movie-list {
+  text-align: center;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 0 9vw;
+}
+
+.movie-list .single-movie {
+  height: 65vh;
+  background: rgba(196, 196, 196, 0.4);
+  width: 90%;
+  margin: 1vh auto;
+  position: relative;
+}
+
+.movie-list .single-movie h2 {
+  height: 12vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-list .single-movie .poster-container {
+  margin: 2vh auto;
+}
+
+.movie-list .single-movie .poster-container img {
+  height: 34vh;
+  width: 26vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.movie-list .single-movie .score {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(196, 196, 196, 0.8);
+  height: 20%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.movie-list .single-movie .score .star-container, .movie-list .single-movie .score h3 {
+  margin: 0 2vh;
+}
+
+.movie-list .single-movie .score h3 {
+  font-size: 2em;
 }
 
 * {
