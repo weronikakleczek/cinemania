@@ -6,7 +6,6 @@ data class UserRegistrationDto(
     @SerializedName("username") var username: String,
     @SerializedName("email") var email: String,
     @SerializedName("password") var password: String,
-    @SerializedName("first_name") var firstName: String,
-    @SerializedName("last_name") var lastName: String,
-    @SerializedName("phone_number") var phoneNumber: String
+    @SerializedName("firstName") var firstName: String,
+    @SerializedName("lastName") var lastName: String
 )

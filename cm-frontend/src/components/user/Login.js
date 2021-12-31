@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Auth from "../../auth/Auth";
+import UserContext from "../UserContext";
 
 const Login = () => {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const {user, setUser} = useContext(UserContext);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+
+    const handleLogin = (e) => {
         e.preventDefault();
         console.log('Logged as:', login);
+        Auth.login(login, password)
+        setUser(login);
+        navigate('/');
     }
 
     return (
         <div className="login">
             <h1>Zaloguj</h1>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input
                     type="text"
                     placeholder="Email"
@@ -28,7 +37,7 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 ></input>
-                <button>Login</button>
+                <button onClick={handleLogin}>Login</button>
             </form>
         </div>
     );

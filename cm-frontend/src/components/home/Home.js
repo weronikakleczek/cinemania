@@ -3,6 +3,7 @@ import Genres from './Genres';
 import More from './More';
 
 const Home = () => {
+
     return (
         <div>
             <Popular />

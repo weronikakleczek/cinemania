@@ -1,6 +1,6 @@
 package com.example.cinemania.domains.picture.exception
 
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -11,16 +11,11 @@ class QueryExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(InvalidQueryException::class)
-    fun handleGithubUserNotFoundException(e: InvalidQueryException): ResponseEntity<String> {
-        val status: HttpStatus = HttpStatus.NOT_FOUND;
-        return ResponseEntity("Invalid Query: ${e.message}", status);
-    }
+    fun handleInvalidQueryException(e: InvalidQueryException): ResponseEntity<String> =
+        ResponseEntity("Invalid Query: ${e.message}", NOT_FOUND);
 
     @ResponseBody
     @ExceptionHandler(InvalidMovieIdException::class)
-    fun handleGithubUserNotFoundException(e: InvalidMovieIdException): ResponseEntity<String> {
-        val status: HttpStatus = HttpStatus.NOT_FOUND;
-        return ResponseEntity("Invalid Movie ID: ${e.message}", status);
-    }
-
+    fun handleInvalidMovieIdException(e: InvalidMovieIdException): ResponseEntity<String> =
+        ResponseEntity("Invalid Movie ID: ${e.message}", NOT_FOUND);
 }

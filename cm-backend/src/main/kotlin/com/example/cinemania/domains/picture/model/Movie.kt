@@ -1,9 +1,5 @@
 package com.example.cinemania.domains.picture.model
 
-import Genres
-import Production_companies
-import Production_countries
-import Spoken_languages
 import com.google.gson.annotations.SerializedName
 
 data class Movie (

@@ -1,18 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Auth from "../../auth/Auth";
 
 const Register = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const navigate = useNavigate();
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Registered as:', username);
+        Auth.register(username, email, password, firstName, lastName);
+        navigate('/');
     }
 
     return (
@@ -44,8 +48,8 @@ const Register = () => {
                     type="text"
                     placeholder="Imie"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                 />
                 <input
                     type="text"

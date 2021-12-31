@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import star from '../assets/icons/star.png';
 
 
@@ -29,28 +30,26 @@ const Top = () => {
 
     return (
         <div className="top-container">
-            <h1>Top 100 Movies</h1>
+            <h1>Top 100 Filmów</h1>
             <div className="top-list">
                 { movieList && (
                         movieList.map((movie, index) => (
-
-
-                            <div className="single-movie" key={ movie.id }>
-                            <h1>{ index + 1 })</h1>
-                            <div className="poster-container">
-                                <img src={ `https://image.tmdb.org/t/p/original/${movie.poster_path}` } className="poster" alt="movie"/>
-                            </div>
-                            <div className="title-description">
-                                <h2>{ movie.title}</h2>
-                                <p>{ movie.overview }</p>
-                            </div>
-                            <div className="score">
-                                <div className="star-container">
-                                    <img src={ star } alt="movie"/>
+                            <Link to={`/movie/${movie.id}`} className="single-movie" key={ movie.id }>
+                                <h1>{ index + 1 })</h1>
+                                <div className="poster-container">
+                                    <img src={ `https://image.tmdb.org/t/p/original/${movie.poster_path}` } className="poster" alt="movie"/>
                                 </div>
-                                <h3>{ movie.vote_average}</h3>
-                            </div>
-                        </div>
+                                <div className="title-description">
+                                    <h2>{ movie.title}</h2>
+                                    <p>{ movie.overview }</p>
+                                </div>
+                                <div className="score">
+                                    <div className="star-container">
+                                        <img src={ star } alt="movie"/>
+                                    </div>
+                                    <h3>{ movie.vote_average}</h3>
+                                </div>
+                        </Link>
                         ))
                     
                 )}

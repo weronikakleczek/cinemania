@@ -12,7 +12,6 @@ data class User(
     @Column var password: String,
     @Column var firstName: String,
     @Column var lastName: String,
-    @Column var phoneNumber: String,
     @Column var creationDate: Instant,
-    @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>
+    @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>,
 )
