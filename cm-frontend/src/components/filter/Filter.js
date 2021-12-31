@@ -41,10 +41,7 @@ const Filter = () => {
         const getAndSetGenres = async () => {
             const genreList = await GetAndSetUtil.getAndSetGenres(setGenres, type);
             if (genre) {
-                console.log("tak");
                 setFilters(new Map().set('with_genres', [genreList.find(x => x.name === genre).id]))
-            } else {
-                console.log("nie");
             }
         }
         getAndSetGenres();

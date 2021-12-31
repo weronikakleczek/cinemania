@@ -11,7 +11,7 @@ import { useState } from 'react';
 import Admin from './components/Admin';
 import Filter from './components/filter/Filter';
 import SingleMovie from './components/pictures/SingleMovie';
-import SingleTv from './components/pictures/SingleTv';
+import SingleTvShow from './components/pictures/SingleTvShow';
 import Profile from './components/user/Profile';
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/movie/:id" element={<SingleMovie />} />
-          <Route exact path="/tv/:id" element={<SingleTv />} />
+          <Route exact path="/tv/:id" element={<SingleTvShow />} />
         </Routes>
       </UserContext.Provider>
     </Router>

@@ -11,11 +11,11 @@ class QueryExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(InvalidQueryException::class)
-    fun handleGithubUserNotFoundException(e: InvalidQueryException): ResponseEntity<String> =
+    fun handleInvalidQueryException(e: InvalidQueryException): ResponseEntity<String> =
         ResponseEntity("Invalid Query: ${e.message}", NOT_FOUND);
 
     @ResponseBody
     @ExceptionHandler(InvalidMovieIdException::class)
-    fun handleGithubUserNotFoundException(e: InvalidMovieIdException): ResponseEntity<String> =
+    fun handleInvalidMovieIdException(e: InvalidMovieIdException): ResponseEntity<String> =
         ResponseEntity("Invalid Movie ID: ${e.message}", NOT_FOUND);
 }

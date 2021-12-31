@@ -4,7 +4,7 @@ import ApiCall from '../../api/ApiCall';
 import star from '../../assets/icons/star.png';
 import not_found from '../../assets/other/404-image-not-found.jpg';
 
-const SingleTv = () => {
+const SingleTvShow = () => {
     
     const { id } = useParams();
     const [tv, setTv] = useState(null);
@@ -61,4 +61,4 @@ const SingleTv = () => {
     )
 }
 
-export default SingleTv
+export default SingleTvShow
