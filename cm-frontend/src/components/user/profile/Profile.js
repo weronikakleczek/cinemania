@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ApiCall from '../../../api/ApiCall';
 import UserContext from '../../UserContext';
+import Friends from './Friends';
 import ProfileNav from './ProfileNav';
+import Stats from './Stats';
+import UserInfo from './UserInfo';
 import WatchedMovies from './WatchedMovies';
 import WatchedTvShows from './WatchedTvShows';
 
@@ -63,8 +66,11 @@ const Profile = () => {
             { firstName && lastName && <h1>Witaj, {capitalize(firstName)} {capitalize(lastName)}!</h1>}
             <div className="nav-and-content">
                 <ProfileNav setCurrentView={setCurrentView} />
-                { currentView === 'movies' && <WatchedMovies watchedMovies={watchedMovies}/> }
+                { currentView === 'movies'  && <WatchedMovies watchedMovies={watchedMovies}/> }
                 { currentView === 'tvShows' && <WatchedTvShows watchedTvShows={watchedTvShows}/> }
+                { currentView === 'friends' && <Friends/> }
+                { currentView === 'info'    && <UserInfo/> }
+                { currentView === 'stats'    && <Stats/> }
             </div>       
         </div>
         :

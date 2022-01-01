@@ -34,7 +34,7 @@ const Top = () => {
             <div className="top-list">
                 { movieList && (
                         movieList.map((movie, index) => (
-                            <Link to={`/movie/${movie.id}`} className="single-movie" key={ movie.id }>
+                            <Link to={`/movie/${movie.id}`} className="single-movie" key={ index }>
                                 <h1>{ index + 1 })</h1>
                                 <div className="poster-container">
                                     <img src={ `https://image.tmdb.org/t/p/original/${movie.poster_path}` } className="poster" alt="movie"/>

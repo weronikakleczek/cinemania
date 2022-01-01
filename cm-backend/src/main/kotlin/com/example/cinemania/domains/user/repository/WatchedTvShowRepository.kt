@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface WatchedTvShowRepository : JpaRepository<WatchedTvShow, Long> {
     fun findAllByUser(user: User): List<WatchedTvShow>
+    fun countWatchedTvShowByUser(user: User): Int
+
 }

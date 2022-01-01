@@ -50,5 +50,65 @@
         .single-option {
             flex: 8;
         }
+
+        .friends {
+            display: flex;
+            justify-content: space-around;
+
+            .add-friend {
+
+
+                input {
+                    color: black;
+                }
+
+
+                .friend-to-add-button {
+                    width: 60%;
+                    color: blueviolet;
+                    margin-top: 2vh;
+                }
+            }
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            width: 50%;
+            margin: 0 auto;
+            text-align: left;
+            .single-info {
+                font-size: 1.4em;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 5vh;
+                p {
+                    display: inline;
+                    color: gray;
+                }
+            }
+        }
+
+        .stats-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 90%;
+            width: 50%;
+            margin: 0 auto;
+            text-align: left;
+            .single-stat {
+                font-size: 1.4em;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 5vh;
+                p {
+                    display: inline;
+                    color: gray;
+                }
+            }
+        }
     }
 }

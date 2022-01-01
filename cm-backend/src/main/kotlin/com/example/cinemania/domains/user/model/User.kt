@@ -6,12 +6,12 @@ import javax.persistence.*
 
 @Entity(name = "account")
 data class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var userId: Long,
+    @Column(name = "user_id") @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var userId: Long,
     @Column var username: String,
     @Column var email: String,
     @Column var password: String,
     @Column var firstName: String,
     @Column var lastName: String,
     @Column var creationDate: Instant,
-    @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>,
+    @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>
 )

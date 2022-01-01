@@ -771,6 +771,90 @@ nav #logo-container {
           flex: 8;
 }
 
+.profile-container .nav-and-content .friends {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.profile-container .nav-and-content .friends .add-friend input {
+  color: black;
+}
+
+.profile-container .nav-and-content .friends .add-friend .friend-to-add-button {
+  width: 60%;
+  color: blueviolet;
+  margin-top: 2vh;
+}
+
+.profile-container .nav-and-content .info-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.profile-container .nav-and-content .info-list .single-info {
+  font-size: 1.4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 5vh;
+}
+
+.profile-container .nav-and-content .info-list .single-info p {
+  display: inline;
+  color: gray;
+}
+
+.profile-container .nav-and-content .stats-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 90%;
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.profile-container .nav-and-content .stats-list .single-stat {
+  font-size: 1.4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 5vh;
+}
+
+.profile-container .nav-and-content .stats-list .single-stat p {
+  display: inline;
+  color: gray;
+}
+
 .movie-list {
   text-align: center;
   display: -ms-grid;

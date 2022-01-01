@@ -33,4 +33,20 @@ class UserController(val userService: UserService) {
             else -> ResponseEntity.status(NOT_FOUND).body("You can only get info about currently logged in user.")
         }
     }
+
+    @GetMapping("/friends/find/{query}")
+    fun findUserByQuery(@PathVariable("query") query: String): ResponseEntity<Any> =
+        userService.findUserByQuery(query)
+
+    @PostMapping("/friends/add/{userToAdd}")
+    fun addNewFriend(@PathVariable("userToAdd") username: String): ResponseEntity<Any> =
+        userService.addNewFriend(username)
+
+    @GetMapping("/friends/all")
+    fun getAllFriends(): ResponseEntity<Any> =
+        userService.getAllFriends()
+
+    @GetMapping("/stats")
+    fun getUserStats(): ResponseEntity<Any> =
+        userService.getUserStats()
 }

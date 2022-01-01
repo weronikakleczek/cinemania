@@ -43,6 +43,23 @@ const getWatchedTvShows = (username) => {
   return axios.get(API_URL + `watched/tv/all/${username}`, {});
 }
 
+const addNewFriend = (username) => {
+  return axios.post(API_URL + `user/friends/add/${username}`, {}, { headers: authHeader() });
+}
+
+const getAllFriends = () => {
+  return axios.get(API_URL + `user/friends/all`, { headers: authHeader() });
+}
+
+const findFriendsByQuery = (query) => {
+  return axios.get(API_URL + `user/friends/find/${query}`, {});
+}
+
+const getUserStats = () => {
+  return axios.get(API_URL + `user/stats`, { headers: authHeader() });
+}
+
+
 
 const ApiCall = {
     getTrending,
@@ -54,7 +71,11 @@ const ApiCall = {
     addMovieToWatched,
     getWatchedMovies,
     addTvShowToWatched,
-    getWatchedTvShows
+    getWatchedTvShows,
+    addNewFriend,
+    getAllFriends,
+    findFriendsByQuery,
+    getUserStats
 };
 
 export default ApiCall;

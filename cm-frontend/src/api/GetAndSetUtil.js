@@ -70,9 +70,11 @@ const getAndSetQueriedListWithNewPage = (query, pictureList, setPictureList, pag
 const getAndSetQueriedListWithNewQuery = async (query, setPictureList) => {
     ApiCall.getQueriedList(query, 1)
     .then(res => {
+        console.log("Res from util: ", res)
         return res.data;
      })
     .then(data => {
+        console.log("Data from util: ", data)
         setPictureList(data);
     })
     .catch(e => {

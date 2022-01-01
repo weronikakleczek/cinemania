@@ -64,7 +64,7 @@ const Popular = () => {
                         <FaArrowAltCircleLeft className="arrow left" onClick={handleLeftArrow}/>
                             {trendingPictures && trendingPictures.map((picture, index) => {
                                 return (
-                                    <Link to={`/${picture.media_type}/${picture.id}`} className="single-movie" key={ picture.id }>
+                                    <Link to={`/${picture.media_type}/${picture.id}`} className="single-movie" key={ index }>
                                         <div className={indexes.includes(index) ? "picture-container active" : "picture-container"} key={index}>
                                             {indexes.includes(index) && <img src={ `https://image.tmdb.org/t/p/original/${picture.poster_path}` } className="picture" alt="popular"/>}
                                         </div>
@@ -76,7 +76,7 @@ const Popular = () => {
                 </div>
                 <div className="balls">
                     { Array.apply(0, Array(5)).map((val, ind) => {
-                        return <div className={ind === currentBall ? "ball active" : "ball"}></div>;
+                        return <div key={ind} className={ind === currentBall ? "ball active" : "ball"}></div>;
                     })}
                     </div>
             </div>

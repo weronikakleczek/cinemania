@@ -4,11 +4,11 @@ const ProfileNav = ({setCurrentView}) => {
     
     return (
         <div className="profile-nav">
-            <button className="option" onClick={() => setCurrentView('movies')}>Obejrzane Filmy</button>
+            <button className="option" onClick={() => setCurrentView('movies')} >Obejrzane Filmy  </button>
             <button className="option" onClick={() => setCurrentView('tvShows')}>Obejrzane Seriale</button>
-            <button className="option">Znajomi</button>
-            <button className="option">Dane</button>
-            <button className="option">Statystyki</button>
+            <button className="option" onClick={() => setCurrentView('friends')}>Znajomi          </button>
+            <button className="option" onClick={() => setCurrentView('info')}   >Dane             </button>
+            <button className="option" onClick={() => setCurrentView('stats')}  >Statystyki       </button>
         </div>
     )
 }

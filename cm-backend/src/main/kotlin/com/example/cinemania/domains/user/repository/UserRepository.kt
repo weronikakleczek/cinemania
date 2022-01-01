@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository: JpaRepository<User, Long> {
     fun findByUsernameIgnoreCase(username: String?): User?
+    fun findAllByUsernameContaining(query: String): List<User>?
 }
