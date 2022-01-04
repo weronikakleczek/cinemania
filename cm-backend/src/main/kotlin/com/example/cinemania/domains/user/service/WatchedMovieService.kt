@@ -1,6 +1,7 @@
 package com.example.cinemania.domains.user.service
 
 import com.example.cinemania.domains.picture.model.Movie
+import com.example.cinemania.domains.user.model.MovieReviewDto
 import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedMovieRepository
@@ -29,15 +30,28 @@ class WatchedMovieService(
         val user = userRepository.findByUsernameIgnoreCase(username)
         return user
             ?.let { watchedMovieRepository.findAllByUser(it) }
-            ?.map { restTemplate.getForEntity("$defaultUri/movie/${it.movieId}?api_key=$apiKey&language=pl-PL", String::class.java) }
+            ?.map {
+                restTemplate.getForEntity(
+                    "$defaultUri/movie/${it.movieId}?api_key=$apiKey&language=pl-PL",
+                    String::class.java
+                )
+            }
             ?.map { gson.fromJson(it.body, Movie::class.java) }
             ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.status(NOT_FOUND).body("This user does not have watched movies.")
     }
 
-    fun addWatchedMovie(username: String, movieId: Long): ResponseEntity<Any> =
-        userRepository.findByUsernameIgnoreCase(username)
-            ?.let { ResponseEntity.ok(watchedMovieRepository.save(WatchedMovie(user = it, movieId = movieId))) }
+    fun addWatchedMovie(movieReviewDto: MovieReviewDto): ResponseEntity<Any> =
+        userRepository.findByUsernameIgnoreCase(movieReviewDto.username)
+            ?.let {
+                WatchedMovie(
+                    user = it,
+                    movieId = movieReviewDto.movieId,
+                    score = movieReviewDto.score,
+                    review = movieReviewDto.review
+                )
+            }
+            ?.let { ResponseEntity.ok(watchedMovieRepository.save(it)) }
             ?: ResponseEntity.status(NOT_FOUND).body("This user does not have watched movies.")
 
 }

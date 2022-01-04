@@ -8,5 +8,5 @@ data class WatchedMovie(
     @ManyToOne @JoinColumn(name="user_id", nullable=false) var user: User,
     @Column(nullable = false) var movieId: Long,
     @Column(nullable = true) var score: Int? = null,
-    @Column(nullable = true) var review: String? = null,
+    @Column(nullable = true, length = 1000) var review: String? = null,
 )

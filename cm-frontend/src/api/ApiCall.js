@@ -27,8 +27,12 @@ const getUserInfo = (username) => {
   return axios.get(API_URL + `user/info/${username}`, { headers: authHeader() });
 };
 
-const addMovieToWatched = (username, movieId) => {
-  return axios.post(API_URL + `watched/movie/add/${username}/${movieId}`, {}, {});
+const addMovieToWatched = (dto) => {
+  return axios.post(API_URL + `watched/movie/add`, JSON.stringify(dto), {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
 }
 
 const getWatchedMovies = (username) => {
@@ -59,6 +63,10 @@ const getUserStats = () => {
   return axios.get(API_URL + `user/stats`, { headers: authHeader() });
 }
 
+const getMovieReviews = (id) => {
+  return axios.get(API_URL + `movie/${id}/reviews`, {});
+}
+
 
 
 const ApiCall = {
@@ -75,7 +83,8 @@ const ApiCall = {
     addNewFriend,
     getAllFriends,
     findFriendsByQuery,
-    getUserStats
+    getUserStats,
+    getMovieReviews
 };
 
 export default ApiCall;

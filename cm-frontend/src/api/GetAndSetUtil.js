@@ -83,6 +83,37 @@ const getAndSetQueriedListWithNewQuery = async (query, setPictureList) => {
 }
 
 
+const getAndSetSinglePicture =  (id, setMovie) => {
+    ApiCall.getSinglePicture(id, 'movie')
+    .then(res => {
+        return res.data;
+     })
+    .then(data => {
+        setMovie(data);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        setMovie(null);
+    });
+}
+
+const getAndSetMovieReviews = (id, set) => {
+    ApiCall.getMovieReviews(id)
+    .then(res => {
+        console.log("REEEEEEEEES: ", res.data);
+        return res.data;
+     })
+    .then(data => {
+        set(data);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        set(null);
+    });
+}
+
+
+
 
 
 const SeachUtil = {
@@ -90,7 +121,9 @@ const SeachUtil = {
     getAndSetFilteredListWithNewPage,
     getAndSetFilteredListWithNewFilterOrType,
     getAndSetQueriedListWithNewPage,
-    getAndSetQueriedListWithNewQuery
+    getAndSetQueriedListWithNewQuery,
+    getAndSetSinglePicture,
+    getAndSetMovieReviews
 };
 
 export default SeachUtil;

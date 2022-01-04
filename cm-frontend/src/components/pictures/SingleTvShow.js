@@ -36,7 +36,8 @@ const SingleTvShow = () => {
     return (
         <>
             {tv &&
-                <div className="single-movie-page-container">
+            <div className="single-movie-page-container">
+                <div className="poster-and-info-container">
                     <div className="top-movie-background">
                         <img 
                             src={ `https://image.tmdb.org/t/p/original/${tv.backdrop_path}` } 
@@ -63,6 +64,7 @@ const SingleTvShow = () => {
                         <p>{ tv.overview }</p>
                     </div>
                 </div>
+            </div>
             }
 
         </>

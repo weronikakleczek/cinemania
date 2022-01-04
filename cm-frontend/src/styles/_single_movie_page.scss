@@ -1,59 +1,155 @@
 .single-movie-page-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;            
-    align-items: center;
+    .poster-and-info-container {
+        position: relative;
+        display: flex;
+        justify-content: center;            
+        align-items: center;
 
-    height: 100vh;
-    width: 100vw;
-
-    .top-movie-background {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
+        height: 75vh;
         width: 100vw;
-        opacity: 0.1;
-        mask-image: linear-gradient(to top, rgba(0, 0, 0, 1.0) 80%, transparent 100%);
-        .background {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit:contain;
+
+        .top-movie-background {
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            opacity: 0.1;
+            mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 1.0) 20%, rgba(0, 0, 0, 1.0) 80%, transparent 100%);
+            .background {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit:contain;
+            }
+        }
+
+        .poster-container {
+            margin: 2vh auto;
+            height: 50vh;
+            width: auto;
+            position: relative;
+            z-index: 1;
+            .poster {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit:contain;
+                filter: drop-shadow(5px 5px 5px #222);
+            }
+        }
+
+        .movie-info {
+            width: 60vw;
+            margin: 0 auto;
+
+            .movie-title {
+                text-align: center;
+                font-size: 2.7em;
+                font-weight: bold;
+            }
+
+            .overview {
+                margin-top: 5vh;
+            }
+
+            .add-to-watched {
+                display: block;
+                margin: 12vh auto 0vh auto;
+                font-size: 1.3em;
+                font-weight: 600;
+                color: black;
+                background-color: blanchedalmond;
+                padding: 20px;
+                border-radius: 3vh;
+                
+            }
+
+            .movie-stats {
+                display: flex;
+                margin: 0 auto;
+                justify-content: space-between;
+                padding: 2% 10%;
+                border-bottom: $beige solid 2px ;
+
+                .stat {
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;            
+        
+                    img {
+                        height: 30px;
+                        width: 30px;
+                        object-fit:contain;
+                        display: flex;
+                        align-items:center;
+                    }
+
+                    .value {
+                        font-size: 1.3em;
+                        display: flex;
+                        align-items:center;
+                    }
+                }
+
+            }
+
+
         }
     }
 
-    .poster-container {
-        margin: 2vh auto;
-        height: 50vh;
-        width: auto;
-        .poster {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit:contain;
-        }
-    }
 
-    .movie-info {
-        width: 60vw;
+
+    .add-form {
         margin: 0 auto;
-
-        h2 {
+        width: 30%;
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
             text-align: center;
         }
+        input, textarea {
+            margin: 10px;
+            color: black;
 
-        p {
-            margin-top: 5vh;
+        }
+        .score-input {
+            width: 10%;
+            height: 4vh;
+            margin: 0 auto;
+        }
+        .review-input {
+            height: 10vh;
+            width: 100%;
+            margin: 0 auto;
+        }
+        button {
+            color: darkolivegreen;
+        }
+    }
+
+    .reviews {
+        width: 60vw;
+        margin: 0 auto;
+        
+        h2 {
+            text-align: center;
+            padding: 5vh 0;
         }
 
-        .score {
-            display: flex;
-            justify-content: center;            
+        .review {
+            background-color: rgba($light-purple-background, 0.2);
+            margin: 1vh 0;
+            padding: 2vh 3vw;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 8fr 1fr;
+            align-items: center;
 
-            img {
-                height: 50px;
-                width: 50px;
-                object-fit:contain;
+            .review-part {
+                padding: 0 2vw;
+                min-width: 8vw;
+
             }
         }
     }
