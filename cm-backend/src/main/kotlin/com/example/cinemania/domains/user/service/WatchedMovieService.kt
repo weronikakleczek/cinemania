@@ -2,6 +2,7 @@ package com.example.cinemania.domains.user.service
 
 import com.example.cinemania.domains.picture.model.Movie
 import com.example.cinemania.domains.user.model.MovieReviewDto
+import com.example.cinemania.domains.user.model.TvReviewDto
 import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedMovieRepository

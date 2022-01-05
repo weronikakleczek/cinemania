@@ -45,6 +45,11 @@ class MovieController(
     fun getMovieReviews(@PathVariable("movieId") movieId: Long): ResponseEntity<Any> =
         movieService.getMovieReviews(movieId)
 
+    @GetMapping("/{movieId}/recommendations")
+    fun getMovieRecommendations(@PathVariable("movieId") movieId: Long): ResponseEntity<Any> =
+        movieService.getMovieRecommendations(movieId)
+
+
     @GetMapping("/top")
     fun getFirstMovies(): List<Movie> {
         val movies: MutableList<Movie> = mutableListOf()

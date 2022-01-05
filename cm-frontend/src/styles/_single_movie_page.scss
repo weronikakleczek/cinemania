@@ -107,24 +107,47 @@
         }
         label {
             text-align: center;
+            padding: 15px 0 5px 0;
         }
-        input, textarea {
+        textarea {
             margin: 10px;
-            color: black;
-
-        }
-        .score-input {
-            width: 10%;
-            height: 4vh;
-            margin: 0 auto;
+            background: rgba(#CCC, 0.5);
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            padding: 5px;
         }
         .review-input {
-            height: 10vh;
+            height: 20vh;
             width: 100%;
             margin: 0 auto;
         }
-        button {
+        .add-review-button {
             color: darkolivegreen;
+            margin: 2vh;
+            width: 20%;
+            font-size: 1.3em;
+            font-weight: 800;
+            margin-inline: auto;
+            height: 4vh;
+        }
+        .stars {
+            display: flex;
+            width: 70%;
+            margin-inline: auto;
+            justify-content: space-evenly;
+    
+            .star {
+                img {
+                    height: 20px;
+                    width: 20px;
+                    object-fit:contain;
+                }
+                button {
+                    background: none;
+                    border: none;
+                }
+            }
         }
     }
 
@@ -149,7 +172,17 @@
             .review-part {
                 padding: 0 2vw;
                 min-width: 8vw;
-
+                .score, .username {
+                    text-align: center;
+                }
+                img {
+                    height: 40px;
+                    width: 40px;
+                    object-fit:contain;
+                    display: flex;
+                    align-items:center;
+                    margin-inline: auto;
+                }
             }
         }
     }

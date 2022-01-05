@@ -1,6 +1,7 @@
 package com.example.cinemania.domains.user.service
 
 import com.example.cinemania.domains.picture.model.Movie
+import com.example.cinemania.domains.user.model.TvReviewDto
 import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.model.WatchedTvShow
 import com.example.cinemania.domains.user.repository.UserRepository
@@ -45,5 +46,18 @@ class WatchedTvShowService(
     fun addWatchedTvShow(username: String, tvShowId: Long): ResponseEntity<Any> =
         userRepository.findByUsernameIgnoreCase(username)
             ?.let { ResponseEntity.ok(watchedTvShowRepository.save(WatchedTvShow(user = it, tvShowId = tvShowId))) }
+            ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user does not have watched tv shows.")
+
+    fun addWatchedTv(tvReviewDto: TvReviewDto): ResponseEntity<Any> =
+        userRepository.findByUsernameIgnoreCase(tvReviewDto.username)
+            ?.let {
+                WatchedTvShow(
+                    user = it,
+                    tvShowId = tvReviewDto.tvId,
+                    score = tvReviewDto.score,
+                    review = tvReviewDto.review
+                )
+            }
+            ?.let { ResponseEntity.ok(watchedTvShowRepository.save(it)) }
             ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user does not have watched tv shows.")
 }

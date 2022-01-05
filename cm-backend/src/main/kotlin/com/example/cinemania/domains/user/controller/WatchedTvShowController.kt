@@ -1,5 +1,6 @@
 package com.example.cinemania.domains.user.controller
 
+import com.example.cinemania.domains.user.model.TvReviewDto
 import com.example.cinemania.domains.user.service.WatchedMovieService
 import com.example.cinemania.domains.user.service.WatchedTvShowService
 import org.springframework.http.ResponseEntity
@@ -14,9 +15,8 @@ class WatchedTvShowController(val watchedTvShowService: WatchedTvShowService) {
     fun getWatchedTvShowsByUser(@PathVariable("username") username: String): ResponseEntity<Any> =
         watchedTvShowService.getWatchedTvShowsByUsername(username)
 
-    @PostMapping("/add/{username}/{tvShowId}")
-    fun addWatchedTvShow(
-        @PathVariable("username") username: String,
-        @PathVariable("tvShowId") tvShowId: Long
-    ): ResponseEntity<Any> = watchedTvShowService.addWatchedTvShow(username, tvShowId)
+    @PostMapping("/add")
+    fun addWatchedTv(@RequestBody tvReviewDto: TvReviewDto): ResponseEntity<Any> = watchedTvShowService.addWatchedTv(tvReviewDto)
+
+
 }

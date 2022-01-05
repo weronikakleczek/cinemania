@@ -1,5 +1,6 @@
 package com.example.cinemania.domains.picture.controller
 
+import com.example.cinemania.domains.picture.service.TvService
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
@@ -14,7 +15,8 @@ import org.springframework.web.client.RestTemplate
 @CrossOrigin(origins = ["http://localhost:3000"])
 class TvController(
     @Value("\${api_base_uri}") private val defaultUri: String,
-    @Value("\${api_key}") private val apiKey: String
+    @Value("\${api_key}") private val apiKey: String,
+    val tvService: TvService
 ) {
 
     private val gson: Gson = Gson()
@@ -30,5 +32,9 @@ class TvController(
 
         return ResponseEntity.ok(JsonParser.parseString(tvShowString.body))
     }
+
+    @GetMapping("/{tvShowId}/reviews")
+    fun getTvShowReviews(@PathVariable("tvShowId") tvShowId: Long): ResponseEntity<Any> =
+        tvService.getTvShowsReviews(tvShowId)
 
 }

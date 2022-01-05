@@ -14,7 +14,7 @@ const Navbar = () => {
         e.preventDefault();
         setUser(null);
         Auth.logout();
-        navigate('/');
+        navigate('/logout');
     }
 
 

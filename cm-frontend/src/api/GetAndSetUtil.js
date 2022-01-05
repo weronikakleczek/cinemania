@@ -83,8 +83,8 @@ const getAndSetQueriedListWithNewQuery = async (query, setPictureList) => {
 }
 
 
-const getAndSetSinglePicture =  (id, setMovie) => {
-    ApiCall.getSinglePicture(id, 'movie')
+const getAndSetSinglePicture =  (id, setMovie, type) => {
+    ApiCall.getSinglePicture(id, type)
     .then(res => {
         return res.data;
      })
@@ -97,8 +97,8 @@ const getAndSetSinglePicture =  (id, setMovie) => {
     });
 }
 
-const getAndSetMovieReviews = (id, set) => {
-    ApiCall.getMovieReviews(id)
+const getAndSetReviews = (id, set, type) => {
+    ApiCall.getReviews(id, type)
     .then(res => {
         console.log("REEEEEEEEES: ", res.data);
         return res.data;
@@ -114,6 +114,37 @@ const getAndSetMovieReviews = (id, set) => {
 
 
 
+const getAndSetTrending = (set, setSize) => {
+    ApiCall.getTrending()
+    .then(res => {
+            return res.data;
+     })
+    .then(data => {
+        set(data);
+        setSize(data.length);
+    })
+    .catch(e => {
+        console.log(e.message);
+    });
+}
+
+
+const getAndSetRecommendations = (id, set, setSize) => {
+    ApiCall.getRecommendedPictures(id)
+    .then(res => {
+        return res.data;
+     })
+    .then(data => {
+        set(data);
+        setSize(data.length);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        set(null);
+    });
+}
+
+
 
 
 const SeachUtil = {
@@ -123,7 +154,9 @@ const SeachUtil = {
     getAndSetQueriedListWithNewPage,
     getAndSetQueriedListWithNewQuery,
     getAndSetSinglePicture,
-    getAndSetMovieReviews
+    getAndSetReviews,
+    getAndSetTrending,
+    getAndSetRecommendations
 };
 
 export default SeachUtil;

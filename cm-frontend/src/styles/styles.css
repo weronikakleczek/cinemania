@@ -760,27 +760,55 @@ nav #logo-container {
 
 .single-movie-page-container .add-form label {
   text-align: center;
+  padding: 15px 0 5px 0;
 }
 
-.single-movie-page-container .add-form input, .single-movie-page-container .add-form textarea {
+.single-movie-page-container .add-form textarea {
   margin: 10px;
-  color: black;
-}
-
-.single-movie-page-container .add-form .score-input {
-  width: 10%;
-  height: 4vh;
-  margin: 0 auto;
+  background: rgba(204, 204, 204, 0.5);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding: 5px;
 }
 
 .single-movie-page-container .add-form .review-input {
-  height: 10vh;
+  height: 20vh;
   width: 100%;
   margin: 0 auto;
 }
 
-.single-movie-page-container .add-form button {
+.single-movie-page-container .add-form .add-review-button {
   color: darkolivegreen;
+  margin: 2vh;
+  width: 20%;
+  font-size: 1.3em;
+  font-weight: 800;
+  margin-inline: auto;
+  height: 4vh;
+}
+
+.single-movie-page-container .add-form .stars {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%;
+  margin-inline: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.single-movie-page-container .add-form .stars .star img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.single-movie-page-container .add-form .stars .star button {
+  background: none;
+  border: none;
 }
 
 .single-movie-page-container .reviews {
@@ -810,6 +838,24 @@ nav #logo-container {
 .single-movie-page-container .reviews .review .review-part {
   padding: 0 2vw;
   min-width: 8vw;
+}
+
+.single-movie-page-container .reviews .review .review-part .score, .single-movie-page-container .reviews .review .review-part .username {
+  text-align: center;
+}
+
+.single-movie-page-container .reviews .review .review-part img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-inline: auto;
 }
 
 .profile-container {
@@ -1024,6 +1070,19 @@ nav #logo-container {
 
 .movie-list .single-movie .score h3 {
   font-size: 2em;
+}
+
+.logout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 60vh;
 }
 
 * {

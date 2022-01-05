@@ -1,6 +1,7 @@
 package com.example.cinemania.domains.user.controller
 
 import com.example.cinemania.domains.user.model.MovieReviewDto
+import com.example.cinemania.domains.user.model.TvReviewDto
 import com.example.cinemania.domains.user.service.WatchedMovieService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

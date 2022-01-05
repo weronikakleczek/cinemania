@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ApiCall from '../../api/ApiCall';
 import GetAndSetUtil from '../../api/GetAndSetUtil';
 import star from '../../assets/icons/star.png';
 import runtime from '../../assets/icons/runtime.png';
+import user_icon from '../../assets/icons/user.png';
 import date from '../../assets/icons/date.png';
 import type from '../../assets/icons/type.png';
 import not_found from '../../assets/other/404-image-not-found.jpg';
 import UserContext from '../UserContext';
 import * as Scroll from 'react-scroll';
+import Stars from './Stars';
 
 
 const SingleMovie = () => {
@@ -24,17 +26,14 @@ const SingleMovie = () => {
     const [review, setReview] = useState(null);
     const [addedReview, setAddedReview] = useState(0);
     const scroll = Scroll.animateScroll;
+    const navigate = useNavigate();
 
-    
-    const wait = async () => {
-        await new Promise(r => setTimeout(r, 100));
-    }
 
 
     useEffect(() => {
 
-        GetAndSetUtil.getAndSetSinglePicture(id, setMovie);
-        GetAndSetUtil.getAndSetMovieReviews(id, setReviews);
+        GetAndSetUtil.getAndSetSinglePicture(id, setMovie, 'movie');
+        GetAndSetUtil.getAndSetReviews(id, setReviews, 'movie');
 
         if (id) {
             ApiCall.getUserInfo(user)
@@ -46,8 +45,10 @@ const SingleMovie = () => {
                 setUserInfo(data);
             })
             .catch(e => {
-                console.log("Error message: ", e)
+                console.log("[Single Movie] Error getting user info: ", e)
                 setUserInfo(null);
+                setUser(null);
+                navigate('/logout');
             });
         }
 
@@ -56,16 +57,17 @@ const SingleMovie = () => {
     }, [])
 
     useEffect(() => {
-        GetAndSetUtil.getAndSetMovieReviews(id, setReviews);
+        GetAndSetUtil.getAndSetReviews(id, setReviews, 'movie');
     }, [addedReview])
 
     const handleAddToWatchedButton = (e) => {
         e.preventDefault();
         if (showForm) {
+            scroll.scrollToTop();
             setButtonText('Dodaj do obejrzanych!')
             setShowForm(false);
         } else {
-            scroll.scrollTo(300);
+            scroll.scrollTo(500);
             setButtonText('Schowaj formularz.')
             setShowForm(true);
         }
@@ -78,7 +80,7 @@ const SingleMovie = () => {
             'movieId': id
         }
 
-        if (score !== '') {
+        if (score !== 0) {
             watchedMovieReview['score'] = score;
         }
 
@@ -86,8 +88,11 @@ const SingleMovie = () => {
             watchedMovieReview['review'] = review;
         }
 
-        await ApiCall.addMovieToWatched(watchedMovieReview);
+        await ApiCall.addToWatched(watchedMovieReview, 'movie');
         setAddedReview(addedReview + 1);
+        setReview('');
+        setScore(0);
+        scroll.scrollToBottom();
     }
 
     
@@ -141,21 +146,14 @@ const SingleMovie = () => {
                         <div className="add-form">
                             <form>
                                 <label>Twoja ocena:</label>
-                                <input 
-                                    className="score-input"
-                                    type="number"
-                                    min="1"
-                                    max="10"
-                                    value={score}
-                                    onChange={e => setScore(e.target.value)}
-                                />
+                                <Stars setScore={setScore}/>
                                 <label>Recenzja:</label>
                                 <textarea 
                                     className="review-input"
                                     value={review}
                                     onChange={e => setReview(e.target.value)}
                                 />
-                                <button onClick={handleAddToWatched}> Dodaj </button>
+                                <button className="add-review-button" onClick={handleAddToWatched}> Dodaj </button>
                             </form>
                         
                         </div>
@@ -165,9 +163,17 @@ const SingleMovie = () => {
                         { reviews && (
                             reviews.map((val, idx) => (
                                 <div className="review" key={idx}>
-                                    <div className="review-part">[{val.user.username}] </div>
+                                    <div className="review-part">
+                                        <img src={ user_icon } alt="user"/>
+                                        <div className="username">{val.user.username}</div>
+                                    </div>
                                     <div className="review-part">{val.review} </div>
-                                    <div className="review-part">{val.score ? val.score : '?'} / 10</div>
+                                    <div className="review-part">
+                                        <img src={ star } alt="movie"/>
+                                        <div className="score">
+                                            {val.score ? `${val.score} / 10` : '-'}
+                                        </div>
+                                    </div>
                                 </div>
                             ))
                         )}

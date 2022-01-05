@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import ApiCall from "../../../api/ApiCall";
 import UserContext from "../../UserContext";
 
@@ -9,6 +10,7 @@ const UserInfo = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [creationDate, setCreationDate] = useState('');
+    const navigate = useNavigate();
 
     
     useEffect(() => {
@@ -23,8 +25,14 @@ const UserInfo = () => {
             setEmail(data.email);
             setCreationDate(data.creationDate);
         })
-        .catch(e => {
-            console.log("Error: ", e);
+        .catch(res => {
+            console.log("[UserInfo] Error getting user info: ", res.response.data);
+            setFirstName(null);
+            setLastName(null);
+            setEmail(null);
+            setCreationDate(null);
+            setUser(null);
+            navigate('/logout');
         });
     }, [])
 

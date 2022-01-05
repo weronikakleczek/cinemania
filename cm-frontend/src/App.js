@@ -12,6 +12,7 @@ import SingleMovie from './components/pictures/SingleMovie';
 import SingleTvShow from './components/pictures/SingleTvShow';
 import Profile from './components/user/profile/Profile';
 import useLocalStorage from './hooks/useLocalStorage';
+import Logout from './components/user/Logout';
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/movie/:id" element={<SingleMovie />} />
           <Route exact path="/tv/:id" element={<SingleTvShow />} />
+          <Route exact path="/logout" element={<Logout />} />
         </Routes>
       </UserContext.Provider>
     </Router>

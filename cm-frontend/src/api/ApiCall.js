@@ -27,8 +27,8 @@ const getUserInfo = (username) => {
   return axios.get(API_URL + `user/info/${username}`, { headers: authHeader() });
 };
 
-const addMovieToWatched = (dto) => {
-  return axios.post(API_URL + `watched/movie/add`, JSON.stringify(dto), {
+const addToWatched = (dto, type) => {
+  return axios.post(API_URL + `watched/${type}/add`, JSON.stringify(dto), {
     headers: {
       "Content-Type": "application/json"
     }
@@ -63,8 +63,12 @@ const getUserStats = () => {
   return axios.get(API_URL + `user/stats`, { headers: authHeader() });
 }
 
-const getMovieReviews = (id) => {
-  return axios.get(API_URL + `movie/${id}/reviews`, {});
+const getReviews = (id, type) => {
+  return axios.get(API_URL + `${type}/${id}/reviews`, {});
+}
+
+const getRecommendedPictures = (id) => {
+  return axios.get(API_URL + `movie/${id}/recommendations`, {});
 }
 
 
@@ -76,7 +80,7 @@ const ApiCall = {
     getQueriedList,
     getSinglePicture,
     getUserInfo,
-    addMovieToWatched,
+    addToWatched,
     getWatchedMovies,
     addTvShowToWatched,
     getWatchedTvShows,
@@ -84,7 +88,8 @@ const ApiCall = {
     getAllFriends,
     findFriendsByQuery,
     getUserStats,
-    getMovieReviews
+    getReviews,
+    getRecommendedPictures
 };
 
 export default ApiCall;
