@@ -60,4 +60,22 @@ class WatchedTvShowService(
             }
             ?.let { ResponseEntity.ok(watchedTvShowRepository.save(it)) }
             ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user does not have watched tv shows.")
+
+    fun isTvShowWatched(tvShowId: Long, username: String): ResponseEntity<Boolean> =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedTvShowRepository.isTvShowWatchedByUser(tvShowId, it) }
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body(false)
+
+    fun getUserScoreOfTvShow(tvShowId: Long, username: String): ResponseEntity<Any> =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedTvShowRepository.findByUserAndTvShowId(it, tvShowId) }
+            ?.let { ResponseEntity.ok(it.score) }
+            ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("Score not found.")
+
+    fun getUserReviewOfTvShow(tvShowId: Long, username: String): ResponseEntity<Any>  =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedTvShowRepository.findByUserAndTvShowId(it, tvShowId) }
+            ?.let { ResponseEntity.ok(it.review) }
+            ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("Review not found.")
 }

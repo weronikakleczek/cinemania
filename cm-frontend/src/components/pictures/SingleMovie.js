@@ -19,6 +19,7 @@ const SingleMovie = () => {
     const {user, setUser} = useContext(UserContext);
     const [reviews, setReviews] = useState([]);
     const [movie, setMovie] = useState(null);
+    const [isWatched, setIsWatched] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [buttonText, setButtonText] = useState('Dodaj do obejrzanych!');
     const [showForm, setShowForm] = useState(false);
@@ -32,8 +33,16 @@ const SingleMovie = () => {
 
     useEffect(() => {
 
+
         GetAndSetUtil.getAndSetSinglePicture(id, setMovie, 'movie');
         GetAndSetUtil.getAndSetReviews(id, setReviews, 'movie');
+        GetAndSetUtil.getAndSetWatched('movie', user, id, setIsWatched)
+            .then(watched => {
+                if (watched) {
+                    GetAndSetUtil.getAndSetScoreAndReview('movie', user, id, setScore, setReview);
+                }
+            })
+
 
         if (id) {
             ApiCall.getUserInfo(user)
@@ -90,11 +99,9 @@ const SingleMovie = () => {
 
         await ApiCall.addToWatched(watchedMovieReview, 'movie');
         setAddedReview(addedReview + 1);
-        setReview('');
-        setScore(0);
+        setIsWatched(true);
         scroll.scrollToBottom();
     }
-
     
 
     return (
@@ -138,24 +145,46 @@ const SingleMovie = () => {
                                     </div>
                                 </div>
                                 <div className="overview">{ movie.overview }</div>
-                                { user && <button className="add-to-watched" onClick={handleAddToWatchedButton}>{buttonText}</button> }
+                                { user && !isWatched && <button className="add-to-watched" onClick={handleAddToWatchedButton}>{buttonText}</button> }
                                 
                         </div>
                     </div>
-                    {showForm && 
-                        <div className="add-form">
-                            <form>
-                                <label>Twoja ocena:</label>
-                                <Stars setScore={setScore}/>
-                                <label>Recenzja:</label>
-                                <textarea 
-                                    className="review-input"
-                                    value={review}
-                                    onChange={e => setReview(e.target.value)}
+                    {showForm && !isWatched &&
+                            <div className="add-form">
+                                <form>
+                                    <label>Twoja ocena:</label>
+                                    <Stars setScore={setScore} onlyDisplay={false}/>
+                                    <label>Recenzja:</label>
+                                    <textarea
+                                        className="review-input"
+                                        value={review}
+                                        onChange={e => setReview(e.target.value)}
+                                    />
+                                    <button className="add-review-button" onClick={handleAddToWatched}> Dodaj </button>
+                                </form>
+                            </div>
+                    }
+                    {isWatched &&
+                        <div className="watched">
+                            <p>Obejrzałeś już ten film.</p>
+                            <p>Twoja ocena:</p>
+                            {score > 0 ?
+                                <Stars
+                                    setScore={setScore}
+                                    onlyDisplay={true}
+                                    watchedScore={score}
                                 />
-                                <button className="add-review-button" onClick={handleAddToWatched}> Dodaj </button>
-                            </form>
-                        
+                                :
+                                'Brak oceny'
+                            }
+                            <p>Twoja recenzja:</p>
+                            <div className="review-output">
+                                { review ?
+                                    review
+                                    :
+                                    'Brak recenzji'
+                                }
+                            </div>
                         </div>
                     }
                     <div className="reviews">

@@ -6,23 +6,31 @@ import com.example.cinemania.domains.user.repository.FriendshipRepository
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedMovieRepository
 import com.example.cinemania.domains.user.repository.WatchedTvShowRepository
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import org.modelmapper.ModelMapper
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.client.RestTemplate
 import java.time.Instant
 
 @Service
 class UserService(
+    @Value("\${api_base_uri}") private val defaultUri: String,
+    @Value("\${api_key}") private val apiKey: String,
     val userRepository: UserRepository,
     val friendshipRepository: FriendshipRepository,
     val watchedMovieRepository: WatchedMovieRepository,
     val watchedTvShowRepository: WatchedTvShowRepository,
     val passwordEncoder: PasswordEncoder,
-    val modelMapper: ModelMapper
+    val modelMapper: ModelMapper,
+    val restTemplate: RestTemplate,
+    val gson: Gson
 ) {
 
     fun getAllUsers(): List<User> = userRepository.findAll()
@@ -71,18 +79,74 @@ class UserService(
 
     fun getUserStats(): ResponseEntity<Any> {
         val auth: Authentication = SecurityContextHolder.getContext().authentication
-        val loggedInUser: User? = userRepository.findByUsernameIgnoreCase(auth.name)
-        val numberOfWatchedMovies = loggedInUser?.let { watchedMovieRepository.countWatchedMovieByUser(it) }
-        val numberOfWatchedTvShows = loggedInUser?.let { watchedTvShowRepository.countWatchedTvShowByUser(it) }
+        val loggedInUser: User =
+            userRepository.findByUsernameIgnoreCase(auth.name)
+            ?: return ResponseEntity.status(NOT_FOUND).body("To be done")
 
-        return numberOfWatchedMovies
-            ?.let { x ->
-                {
-                    numberOfWatchedTvShows?.let { y -> UserStatsDto(x, y) }
-                }
-            }
-            ?.invoke()
-            ?.let { ResponseEntity.ok(it) }
-            ?: ResponseEntity.status(NOT_FOUND).body("To be done")
+        val numberOfWatchedMovies = getNumberOfWatched(PictureType.Movie, loggedInUser)
+        val numberOfWatchedTvShows = getNumberOfWatched(PictureType.TvShow, loggedInUser)
+        val numberOfHoursWatching = getHoursSpentWatching(PictureType.Movie, loggedInUser) +
+                                    getHoursSpentWatching(PictureType.TvShow, loggedInUser)
+
+        return ResponseEntity.ok(
+            UserStatsDto(
+                numberOfWatchedMovies,
+                numberOfWatchedTvShows,
+                numberOfHoursWatching
+        ))
     }
+
+    fun getNumberOfWatched(type: PictureType, user: User): Int = when (type) {
+        PictureType.Movie -> watchedMovieRepository.countWatchedMovieByUser(user)
+        PictureType.TvShow -> watchedTvShowRepository.countWatchedTvShowByUser(user)
+    }
+
+    fun getHoursSpentWatching(type: PictureType, user: User): Int = when (type) {
+        PictureType.Movie -> {
+            watchedMovieRepository.findAllByUser(user)
+                .takeIf { it.isNotEmpty() }
+                ?.asSequence()
+                ?.map { it.movieId }
+                ?.map {
+                    restTemplate.getForEntity(
+                        "$defaultUri/movie/${it}?api_key=$apiKey&language=pl-PL",
+                        String::class.java
+                    )
+                }
+                ?.map { JsonParser.parseString(it.body).asJsonObject.get("runtime").asInt }
+                ?.reduce { sum, element -> sum + element }
+                ?.let { it / 60 }
+                ?: 0
+        }
+        PictureType.TvShow -> {
+            watchedTvShowRepository.findAllByUser(user)
+                .takeIf { it.isNotEmpty() }
+                ?.asSequence()
+                ?.map { it.tvShowId }
+                ?.map {
+                    restTemplate.getForEntity(
+                        "$defaultUri/tv/${it}?api_key=$apiKey&language=pl-PL",
+                        String::class.java
+                    )
+                }
+                ?.map {
+                    JsonParser.parseString(it.body).asJsonObject
+                        .get("number_of_episodes").asInt *
+                            ((JsonParser.parseString(it.body).asJsonObject
+                        .get("episode_run_time").asJsonArray
+                        .toList()
+                        .getOrNull(0)
+                        ?.asInt) ?: 45)
+                }
+                ?.reduce { sum, element -> sum + element }
+                ?.let { it / 60 }
+                ?: 0
+        }
+    }
+
+}
+
+sealed class PictureType {
+    object Movie : PictureType()
+    object TvShow : PictureType()
 }

@@ -18,5 +18,24 @@ class WatchedTvShowController(val watchedTvShowService: WatchedTvShowService) {
     @PostMapping("/add")
     fun addWatchedTv(@RequestBody tvReviewDto: TvReviewDto): ResponseEntity<Any> = watchedTvShowService.addWatchedTv(tvReviewDto)
 
+    @GetMapping("/{tvShowId}/{username}/isWatched")
+    fun isMovieWatched(
+        @PathVariable("tvShowId") tvShowId: Long,
+        @PathVariable("username") username: String
+    ): ResponseEntity<Boolean> =
+        watchedTvShowService.isTvShowWatched(tvShowId, username)
 
+    @GetMapping("/{tvShowId}/{username}/score")
+    fun getUserScoreOfTvShow(
+        @PathVariable("tvShowId") tvShowId: Long,
+        @PathVariable("username") username: String
+    ): ResponseEntity<Any> =
+        watchedTvShowService.getUserScoreOfTvShow(tvShowId, username)
+
+    @GetMapping("/{tvShowId}/{username}/review")
+    fun getUserReviewOfMovie(
+        @PathVariable("tvShowId") tvShowId: Long,
+        @PathVariable("username") username: String
+    ): ResponseEntity<Any> =
+        watchedTvShowService.getUserReviewOfTvShow(tvShowId, username)
 }

@@ -71,6 +71,20 @@ const getRecommendedPictures = (id) => {
   return axios.get(API_URL + `movie/${id}/recommendations`, {});
 }
 
+const getIsWatched = (type, username, picture_id) => {
+    return axios.get(API_URL + `watched/${type}/${picture_id}/${username}/isWatched`, {});
+}
+
+const getScore = (type, username, picture_id) => {
+    return axios.get(API_URL + `watched/${type}/${picture_id}/${username}/score`, {});
+}
+
+const getReview = (type, username, picture_id) => {
+    return axios.get(API_URL + `watched/${type}/${picture_id}/${username}/review`, {});
+}
+
+
+
 
 
 const ApiCall = {
@@ -89,7 +103,10 @@ const ApiCall = {
     findFriendsByQuery,
     getUserStats,
     getReviews,
-    getRecommendedPictures
+    getRecommendedPictures,
+    getIsWatched,
+    getScore,
+    getReview
 };
 
 export default ApiCall;

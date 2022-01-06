@@ -96,9 +96,19 @@
         }
     }
 
+    .watched {
+        p {
+            font-size: 1.4em;
+            padding: 20px;
+        }
+        .review-output {
+            background: rgba(#bbb, 0.3);
+            padding: 10%;
+        }
+    }
 
-
-    .add-form {
+    .add-form, .watched {
+        text-align: center;
         margin: 0 auto;
         width: 30%;
         form {

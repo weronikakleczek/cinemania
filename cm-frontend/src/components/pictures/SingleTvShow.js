@@ -20,10 +20,11 @@ const SingleTvShow = () => {
     const {user, setUser} = useContext(UserContext);
     const [reviews, setReviews] = useState([]);
     const [tv, setTv] = useState(null);
+    const [isWatched, setIsWatched] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [buttonText, setButtonText] = useState('Dodaj do obejrzanych!');
     const [showForm, setShowForm] = useState(false);
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(null);
     const [review, setReview] = useState(null);
     const [addedReview, setAddedReview] = useState(0);
     const scroll = Scroll.animateScroll;
@@ -33,6 +34,12 @@ const SingleTvShow = () => {
 
         GetAndSetUtil.getAndSetSinglePicture(id, setTv, 'tv');
         GetAndSetUtil.getAndSetReviews(id, setReviews, 'tv');
+        GetAndSetUtil.getAndSetWatched('tv', user, id, setIsWatched)
+            .then(watched => {
+                if (watched) {
+                    GetAndSetUtil.getAndSetScoreAndReview('tv', user, id, setScore, setReview);
+                }
+            })
 
         if (id) {
             ApiCall.getUserInfo(user)
@@ -89,8 +96,7 @@ const SingleTvShow = () => {
 
         await ApiCall.addToWatched(watchedMovieReview, 'tv');
         setAddedReview(addedReview + 1);
-        setReview('');
-        setScore(0);
+        setIsWatched(true);
         scroll.scrollToBottom();
 
     }
@@ -148,15 +154,15 @@ const SingleTvShow = () => {
                                     </div>
                                 </div>
                                 <div className="overview">{ tv.overview }</div>
-                                { user && <button className="add-to-watched" onClick={handleAddToWatchedButton}>{buttonText}</button> }
+                                { user && !isWatched && <button className="add-to-watched" onClick={handleAddToWatchedButton}>{buttonText}</button> }
                                 
                         </div>
                     </div>
-                    {showForm && 
+                    {showForm && !isWatched &&
                         <div className="add-form">
                             <form>
                                 <label>Twoja ocena:</label>
-                                <Stars setScore={setScore}/>
+                                <Stars setScore={setScore} onlyDisplay={false}/>
                                 <label>Recenzja:</label>
                                 <textarea 
                                     className="review-input"
@@ -165,7 +171,29 @@ const SingleTvShow = () => {
                                 />
                                 <button className="add-review-button" onClick={handleAddToWatched}> Dodaj </button>
                             </form>
-                        
+                        </div>
+                    }
+                    {isWatched &&
+                        <div className="watched">
+                            <p>Obejrzałeś już ten film.</p>
+                            <p>Twoja ocena:</p>
+                            {score > 0 ?
+                                <Stars
+                                    setScore={setScore}
+                                    onlyDisplay={true}
+                                    watchedScore={score}
+                                />
+                                :
+                                'Brak oceny'
+                            }
+                            <p>Twoja recenzja:</p>
+                            <div className="review-output">
+                                { review ?
+                                    review
+                                    :
+                                    'Brak recenzji'
+                                }
+                            </div>
                         </div>
                     }
                     <div className="reviews">
@@ -193,13 +221,6 @@ const SingleTvShow = () => {
 
         </>
     )
-
-
-
-
-
-
-
 }
 
 export default SingleTvShow

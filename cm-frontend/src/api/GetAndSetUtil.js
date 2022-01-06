@@ -144,10 +144,51 @@ const getAndSetRecommendations = (id, set, setSize) => {
     });
 }
 
+const getAndSetWatched = (type, username, picture_id, set) => {
+    return ApiCall.getIsWatched(type, username, picture_id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            set(data);
+            return data;
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            set(false);
+        });
+}
+
+const getAndSetScoreAndReview = (type, user, id, setScore, setReview) => {
+    ApiCall.getScore(type, user, id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setScore(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setScore(null);
+        });
+
+    ApiCall.getReview(type, user, id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setReview(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setReview(null);
+        });
+}
 
 
 
-const SeachUtil = {
+
+const SearchUtil = {
     getAndSetGenres,
     getAndSetFilteredListWithNewPage,
     getAndSetFilteredListWithNewFilterOrType,
@@ -156,7 +197,9 @@ const SeachUtil = {
     getAndSetSinglePicture,
     getAndSetReviews,
     getAndSetTrending,
-    getAndSetRecommendations
+    getAndSetRecommendations,
+    getAndSetWatched,
+    getAndSetScoreAndReview
 };
 
-export default SeachUtil;
+export default SearchUtil;

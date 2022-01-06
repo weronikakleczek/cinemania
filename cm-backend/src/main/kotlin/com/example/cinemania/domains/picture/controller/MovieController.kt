@@ -23,13 +23,10 @@ import org.springframework.web.client.RestTemplate
 class MovieController(
     @Value("\${api_base_uri}") private val defaultUri: String,
     @Value("\${api_key}") private val apiKey: String,
+    private val gson: Gson,
+    private val restTemplate: RestTemplate,
     private val movieService: MovieService
 ) {
-
-    private val gson: Gson = Gson()
-    private val restTemplate: RestTemplate = RestTemplateBuilder()
-        .rootUri(defaultUri)
-        .build()
 
     @GetMapping("/{movieId}")
     fun getMovieById(@PathVariable("movieId") movieId: String): Movie {

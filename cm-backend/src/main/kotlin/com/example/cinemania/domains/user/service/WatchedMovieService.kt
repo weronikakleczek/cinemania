@@ -2,7 +2,6 @@ package com.example.cinemania.domains.user.service
 
 import com.example.cinemania.domains.picture.model.Movie
 import com.example.cinemania.domains.user.model.MovieReviewDto
-import com.example.cinemania.domains.user.model.TvReviewDto
 import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedMovieRepository
@@ -27,9 +26,8 @@ class WatchedMovieService(
         .rootUri(defaultUri)
         .build()
 
-    fun getWatchedMoviesByUsername(username: String): ResponseEntity<Any> {
-        val user = userRepository.findByUsernameIgnoreCase(username)
-        return user
+    fun getWatchedMoviesByUsername(username: String): ResponseEntity<Any> =
+        userRepository.findByUsernameIgnoreCase(username)
             ?.let { watchedMovieRepository.findAllByUser(it) }
             ?.map {
                 restTemplate.getForEntity(
@@ -40,7 +38,7 @@ class WatchedMovieService(
             ?.map { gson.fromJson(it.body, Movie::class.java) }
             ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.status(NOT_FOUND).body("This user does not have watched movies.")
-    }
+
 
     fun addWatchedMovie(movieReviewDto: MovieReviewDto): ResponseEntity<Any> =
         userRepository.findByUsernameIgnoreCase(movieReviewDto.username)
@@ -54,5 +52,23 @@ class WatchedMovieService(
             }
             ?.let { ResponseEntity.ok(watchedMovieRepository.save(it)) }
             ?: ResponseEntity.status(NOT_FOUND).body("This user does not have watched movies.")
+
+    fun isMovieWatched(movieId: Long, username: String): ResponseEntity<Boolean> =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedMovieRepository.isMovieWatchedByUser(movieId, it) }
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(NOT_FOUND).body(false)
+
+    fun getUserScoreOfMovie(movieId: Long, username: String): ResponseEntity<Any> =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedMovieRepository.findByUserAndMovieId(it, movieId) }
+            ?.let { ResponseEntity.ok(it.score) }
+            ?: ResponseEntity.status(NOT_FOUND).body("Score not found.")
+
+    fun getUserReviewOfMovie(movieId: Long, username: String): ResponseEntity<Any>  =
+        userRepository.findByUsernameIgnoreCase(username)
+            ?.let { watchedMovieRepository.findByUserAndMovieId(it, movieId) }
+            ?.let { ResponseEntity.ok(it.review) }
+            ?: ResponseEntity.status(NOT_FOUND).body("Review not found.")
 
 }
