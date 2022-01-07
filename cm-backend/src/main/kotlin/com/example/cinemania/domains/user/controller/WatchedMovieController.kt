@@ -14,6 +14,10 @@ class WatchedMovieController(val watchedMovieService: WatchedMovieService) {
     fun getWatchedMoviesByUser(@PathVariable("username") username: String): ResponseEntity<Any> =
         watchedMovieService.getWatchedMoviesByUsername(username)
 
+    @GetMapping("/recent/{userId}")
+    fun getRecentlyWatchedMoviesByUser(@PathVariable("userId") userId: Long): ResponseEntity<Any> =
+        watchedMovieService.getRecentlyWatchedMoviesByUser(userId)
+
     @PostMapping("/add")
     fun addWatchedMovie(@RequestBody movieReviewDto: MovieReviewDto): ResponseEntity<Any> =
         watchedMovieService.addWatchedMovie(movieReviewDto)

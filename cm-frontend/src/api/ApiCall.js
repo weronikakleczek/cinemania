@@ -56,7 +56,7 @@ const getAllFriends = () => {
 }
 
 const findFriendsByQuery = (query) => {
-  return axios.get(API_URL + `user/friends/find/${query}`, {});
+  return axios.get(API_URL + `user/friends/find/${query}`, { headers: authHeader() });
 }
 
 const getUserStats = () => {
@@ -83,6 +83,9 @@ const getReview = (type, username, picture_id) => {
     return axios.get(API_URL + `watched/${type}/${picture_id}/${username}/review`, {});
 }
 
+const getRecentPictures = (type, id) => {
+    return axios.get(API_URL + `watched/${type}/recent/${id}`, {});
+}
 
 
 
@@ -106,7 +109,8 @@ const ApiCall = {
     getRecommendedPictures,
     getIsWatched,
     getScore,
-    getReview
+    getReview,
+    getRecentPictures
 };
 
 export default ApiCall;

@@ -15,6 +15,10 @@ class WatchedTvShowController(val watchedTvShowService: WatchedTvShowService) {
     fun getWatchedTvShowsByUser(@PathVariable("username") username: String): ResponseEntity<Any> =
         watchedTvShowService.getWatchedTvShowsByUsername(username)
 
+    @GetMapping("/recent/{userId}")
+    fun getRecentlyWatchedTvShowsByUser(@PathVariable("userId") userId: Long): ResponseEntity<Any> =
+        watchedTvShowService.getRecentlyWatchedTvShowsByUser(userId)
+
     @PostMapping("/add")
     fun addWatchedTv(@RequestBody tvReviewDto: TvReviewDto): ResponseEntity<Any> = watchedTvShowService.addWatchedTv(tvReviewDto)
 

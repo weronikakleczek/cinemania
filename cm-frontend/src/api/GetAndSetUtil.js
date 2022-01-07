@@ -185,7 +185,31 @@ const getAndSetScoreAndReview = (type, user, id, setScore, setReview) => {
         });
 }
 
+const getAndSetRecentPictures = (id, setMovies, setTvs) => {
+    ApiCall.getRecentPictures('movie', id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setMovies(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setMovies(null);
+        });
 
+    ApiCall.getRecentPictures('tv', id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setTvs(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setTvs(null);
+        });
+}
 
 
 const SearchUtil = {
@@ -199,7 +223,8 @@ const SearchUtil = {
     getAndSetTrending,
     getAndSetRecommendations,
     getAndSetWatched,
-    getAndSetScoreAndReview
+    getAndSetScoreAndReview,
+    getAndSetRecentPictures
 };
 
 export default SearchUtil;

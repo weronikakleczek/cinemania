@@ -13,6 +13,7 @@ import SingleTvShow from './components/pictures/SingleTvShow';
 import Profile from './components/user/profile/Profile';
 import useLocalStorage from './hooks/useLocalStorage';
 import Logout from './components/user/Logout';
+import User from "./components/user/User";
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/user/:id" element={<User />} />
           <Route exact path="/movie/:id" element={<SingleMovie />} />
           <Route exact path="/tv/:id" element={<SingleTvShow />} />
           <Route exact path="/logout" element={<Logout />} />

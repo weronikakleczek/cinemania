@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ApiCall from "../../../api/ApiCall";
+import {useNavigate} from "react-router-dom";
 
 const Friends = () => {
 
     const [friends, setFriends] = useState([]);
     const [query, setQuery] = useState('');
     const [friendsByQuery, setFriendsByQuery] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         ApiCall.getAllFriends()
@@ -73,7 +75,9 @@ const Friends = () => {
                 <h2>Twoi znajomi:</h2>
                 { friends && (
                     friends.map((val, idx) => (
-                        <div key={idx}>{ val.username }</div>
+                        <button onClick={() => {navigate(`/user/${val.userId}`)}}>
+                            <div key={idx}>{ val.username }</div>
+                        </button>
                     ))
                 )}
             </div>

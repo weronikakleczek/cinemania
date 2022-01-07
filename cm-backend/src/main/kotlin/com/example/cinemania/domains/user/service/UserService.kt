@@ -72,10 +72,13 @@ class UserService(
         }?.let { ResponseEntity.ok(it) } ?: ResponseEntity.status(NOT_FOUND).body("To be done, 3.")
     }
 
-    fun findUserByQuery(query: String): ResponseEntity<Any> =
-        userRepository.findAllByUsernameContaining(query)?.let { ResponseEntity.ok(it) } ?: ResponseEntity.status(
-            NOT_FOUND
-        ).body("Can not find user with username like $query.")
+    fun findUserByQuery(query: String): ResponseEntity<Any> {
+        val name = SecurityContextHolder.getContext().authentication.name
+        return userRepository.findAllByUsernameContaining(query)
+            ?.filter { it.username != name }
+            ?.let{ ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(NOT_FOUND).body("Can not find user with username like $query.")
+    }
 
     fun getUserStats(): ResponseEntity<Any> {
         val auth: Authentication = SecurityContextHolder.getContext().authentication

@@ -1,9 +1,8 @@
 package com.example.cinemania.domains.user.service
 
-import com.example.cinemania.domains.picture.model.Movie
 import com.example.cinemania.domains.user.model.TvReviewDto
-import com.example.cinemania.domains.user.model.WatchedMovie
 import com.example.cinemania.domains.user.model.WatchedTvShow
+import com.example.cinemania.domains.user.model.WatchedTvShowWithTvShowInfo
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedTvShowRepository
 import com.google.gson.Gson
@@ -43,6 +42,31 @@ class WatchedTvShowService(
             ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user does not have watched tv shows.")
     }
 
+    fun getRecentlyWatchedTvShowsByUser(userId: Long): ResponseEntity<Any> =
+        userRepository.findByUserId(userId)
+            ?.let { watchedTvShowRepository.findAllByUser(it) }
+            ?.sortedBy { it.score }
+            ?.take(3)
+            ?.map {
+                val stringResponse = restTemplate.getForEntity(
+                    "$defaultUri/tv/${it.tvShowId}?api_key=$apiKey&language=pl-PL",
+                    String::class.java
+                )
+                val tv = stringResponse.body
+                WatchedTvShowWithTvShowInfo(
+                    it.user.userId,
+                    it.tvShowId,
+                    it.score ?: 0,
+                    it.review ?: "",
+                    JsonParser.parseString(tv).asJsonObject.get("poster_path").asString,
+                    JsonParser.parseString(tv).asJsonObject.get("name").asString,
+                    JsonParser.parseString(tv).asJsonObject.get("vote_average").asDouble,
+                )
+            }
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("This user does not have watched tv shows.")
+
+
     fun addWatchedTvShow(username: String, tvShowId: Long): ResponseEntity<Any> =
         userRepository.findByUsernameIgnoreCase(username)
             ?.let { ResponseEntity.ok(watchedTvShowRepository.save(WatchedTvShow(user = it, tvShowId = tvShowId))) }
@@ -73,7 +97,7 @@ class WatchedTvShowService(
             ?.let { ResponseEntity.ok(it.score) }
             ?: ResponseEntity.status(HttpStatus.NOT_FOUND).body("Score not found.")
 
-    fun getUserReviewOfTvShow(tvShowId: Long, username: String): ResponseEntity<Any>  =
+    fun getUserReviewOfTvShow(tvShowId: Long, username: String): ResponseEntity<Any> =
         userRepository.findByUsernameIgnoreCase(username)
             ?.let { watchedTvShowRepository.findByUserAndTvShowId(it, tvShowId) }
             ?.let { ResponseEntity.ok(it.review) }
