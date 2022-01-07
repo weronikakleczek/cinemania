@@ -44,25 +44,20 @@ const SingleMovie = () => {
             })
 
 
-        if (id) {
+        if (user) {
             ApiCall.getUserInfo(user)
             .then(res => {
                 return res.data;
              })
             .then(data => {
-                console.log("User info: ", data);
                 setUserInfo(data);
             })
             .catch(e => {
-                console.log("[Single Movie] Error getting user info: ", e)
                 setUserInfo(null);
                 setUser(null);
                 navigate('/logout');
             });
         }
-
-        console.log("After if: ", userInfo);
-
     }, [])
 
     useEffect(() => {

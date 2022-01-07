@@ -12,7 +12,6 @@ const Stats = () => {
             return res.data;
          })
         .then(data => {
-            console.log("Recieved data: ", data)
             setUserStats(data);
         })
         .catch(e => {

@@ -12,7 +12,6 @@ const Search = () => {
 
     useEffect(() => {
         SearchUtil.getAndSetQueriedListWithNewQuery(query, setPictureList);
-        console.log(pictureList)
     }, [query])
 
     useEffect(() => {

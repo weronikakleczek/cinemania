@@ -34,15 +34,12 @@ const getAndSetFilteredListWithNewPage = (filters, pictureList, setPictureList, 
 }
 
 const getAndSetFilteredListWithNewFilterOrType = (filters, setPictureList, type) => {
-    console.log('Filters:', filters);
-    console.log('Type:', type);
     ApiCall.getFilteredList(filters, 1, type)
     .then(res => {
         return res.data;
     })
     .then(data => {
         setPictureList(data);
-        console.log('Data: ', data);
     })
     .catch(e => {
         console.log(e);
@@ -70,11 +67,9 @@ const getAndSetQueriedListWithNewPage = (query, pictureList, setPictureList, pag
 const getAndSetQueriedListWithNewQuery = async (query, setPictureList) => {
     ApiCall.getQueriedList(query, 1)
     .then(res => {
-        console.log("Res from util: ", res)
         return res.data;
      })
     .then(data => {
-        console.log("Data from util: ", data)
         setPictureList(data);
     })
     .catch(e => {
@@ -100,7 +95,6 @@ const getAndSetSinglePicture =  (id, setMovie, type) => {
 const getAndSetReviews = (id, set, type) => {
     ApiCall.getReviews(id, type)
     .then(res => {
-        console.log("REEEEEEEEES: ", res.data);
         return res.data;
      })
     .then(data => {

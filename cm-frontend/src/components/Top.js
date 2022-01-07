@@ -20,7 +20,6 @@ const Top = () => {
          })
         .then(data => {
             setMovieList(data);
-            console.log(data);
         })
         .catch(e => {
             console.log(e.message);

@@ -12,11 +12,9 @@ const Friends = () => {
     useEffect(() => {
         ApiCall.getAllFriends()
         .then(res => {
-            console.log('Res: ', res);
             return res.data;
         })
         .then(data => {
-            console.log('Data: ', data);
             setFriends(data);
         })
         .catch(err => {
@@ -27,22 +25,16 @@ const Friends = () => {
     const handleAdd = async (username) => {
         await ApiCall.addNewFriend(username)
         .then(res => {
-            console.log("Adding new friend, res: ", res);
             return res.data;
-        })
-        .then(data => {
-            console.log("Adding new friend, data: ", data);
         })
         .catch(err => {
             console.log("Adding new friend, error: ", err.message);
         })
         await ApiCall.getAllFriends()
         .then(res => {
-            console.log('Res: ', res);
             return res.data;
         })
         .then(data => {
-            console.log('Data: ', data);
             setFriends(data);
         })
         .catch(err => {

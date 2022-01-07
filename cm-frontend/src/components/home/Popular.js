@@ -22,34 +22,26 @@ const Popular = () => {
             if (user !== null) {
                 const watchedMovies = await ApiCall.getWatchedMovies(user)
                     .then(res => {
-                        console.log('Res data:', res.data);
                         return res.data;
                     });
     
-                console.log("!: ", watchedMovies);
                 if (watchedMovies !== null && watchedMovies.length > 0) {
                     let array = [];
                     const fillArray = async (arr) => {
                         for (let i = 0; i < watchedMovies.length; i++) {
                             await ApiCall.getRecommendedPictures(watchedMovies[i].id)
                             .then(res => {
-                                console.log('Arrray before', arr)
                                 arr = arr.concat(res.data);
-                                console.log('Arrray after', arr)
                             })
                         }
                         return arr;
                     }
                     array = await fillArray(array);
-                    console.log('Arrrrrray', array)
 
                     const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
                     const croppedArray = shuffledArray.slice(0, 20);
-                    console.log('Cropped array', croppedArray)
                     setTrendingPictures(croppedArray);
                     setPictureListSize(croppedArray.length);
-
-                    // GetAndSetUtil.getAndSetRecommendations(watchedMovies[0].id, setTrendingPictures, setPictureListSize);
                 } else {
                     GetAndSetUtil.getAndSetTrending(setTrendingPictures, setPictureListSize);
                 }
@@ -65,7 +57,6 @@ const Popular = () => {
 
     const handleLeftArrow = () => {
         let currentMinVal = indexes[0]
-        console.log(currentMinVal)
         if (currentMinVal <= 0) {
             currentMinVal = 20
         }
@@ -73,7 +64,6 @@ const Popular = () => {
         for (let i = 4; i > 0; i--) {
             newIndexes.push(currentMinVal - i)
         }
-        console.log(newIndexes)
         setIndexes(newIndexes)
         setCurrentBall(currentBall === 0 ? 4 : currentBall - 1)
     }

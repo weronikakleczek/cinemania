@@ -62,7 +62,7 @@ class UserService(
             }
         }?.also { x -> friendToAdd?.let { y -> friendshipRepository.save(Friendship(userOne = x, userTwo = y)) } }
             ?.let { ResponseEntity.ok("$loggedInUser successfully added ${friendToAdd ?: "???"} to friends.") }
-            ?: ResponseEntity.status(NOT_FOUND).body("To be done, 2.")
+            ?: ResponseEntity.status(NOT_FOUND).body("To do.") // TODO
     }
 
     fun getAllFriends(): ResponseEntity<Any> {
@@ -70,7 +70,7 @@ class UserService(
         val loggedInUser: User? = userRepository.findByUsernameIgnoreCase(auth.name)
         return loggedInUser?.let { friendshipRepository.findAllByUserOneOrUserTwo(it, it) }?.map {
             if (it?.userOne?.username == loggedInUser.username) it.userTwo else it?.userOne
-        }?.let { ResponseEntity.ok(it) } ?: ResponseEntity.status(NOT_FOUND).body("To be done, 3.")
+        }?.let { ResponseEntity.ok(it) } ?: ResponseEntity.status(NOT_FOUND).body("To do") // TODO
     }
 
     fun findUserByQuery(query: String): ResponseEntity<Any> {
@@ -92,7 +92,7 @@ class UserService(
         val auth: Authentication = SecurityContextHolder.getContext().authentication
         val loggedInUser: User =
             userRepository.findByUsernameIgnoreCase(auth.name)
-            ?: return ResponseEntity.status(NOT_FOUND).body("To be done")
+            ?: return ResponseEntity.status(NOT_FOUND).body("To do.")//TODO
 
         val numberOfWatchedMovies = getNumberOfWatched(PictureType.Movie, loggedInUser)
         val numberOfWatchedTvShows = getNumberOfWatched(PictureType.TvShow, loggedInUser)

@@ -25,7 +25,6 @@ const Profile = () => {
             return res.data;
          })
         .then(data => {
-            console.log("Recieved data: ", data)
             setFirstName(data.firstName);
             setLastName(data.lastName);
         })
@@ -40,7 +39,6 @@ const Profile = () => {
             return res.data;
          })
         .then(data => {
-            console.log("Watched: ", data);
             setWatchedMovies(data);
         })
         .catch(e => {
@@ -52,7 +50,6 @@ const Profile = () => {
             return res.data;
          })
         .then(data => {
-            console.log("Watched: ", data);
             setWatchedTvShows(data);
         })
         .catch(e => {

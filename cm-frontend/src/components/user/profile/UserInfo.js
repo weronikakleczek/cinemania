@@ -19,7 +19,6 @@ const UserInfo = () => {
             return res.data;
          })
         .then(data => {
-            console.log("Recieved data: ", data)
             setFirstName(data.firstName);
             setLastName(data.lastName);
             setEmail(data.email);
