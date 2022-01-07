@@ -13,7 +13,6 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log('Logged as:', login);
         Auth.login(login, password)
         setUser(login);
         navigate('/');

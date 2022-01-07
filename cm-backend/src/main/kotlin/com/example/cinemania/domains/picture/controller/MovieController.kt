@@ -6,6 +6,8 @@ import com.example.cinemania.domains.picture.model.Movie
 import com.example.cinemania.domains.picture.model.MovieList
 import com.example.cinemania.domains.picture.model.Results
 import com.example.cinemania.domains.picture.model.TrendingPicturesList
+import com.example.cinemania.domains.picture.service.MovieService
+import com.example.cinemania.domains.user.repository.WatchedMovieRepository
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
@@ -20,13 +22,11 @@ import org.springframework.web.client.RestTemplate
 @CrossOrigin(origins = ["http://localhost:3000"])
 class MovieController(
     @Value("\${api_base_uri}") private val defaultUri: String,
-    @Value("\${api_key}") private val apiKey: String
+    @Value("\${api_key}") private val apiKey: String,
+    private val gson: Gson,
+    private val restTemplate: RestTemplate,
+    private val movieService: MovieService
 ) {
-
-    private val gson: Gson = Gson()
-    private val restTemplate: RestTemplate = RestTemplateBuilder()
-        .rootUri(defaultUri)
-        .build()
 
     @GetMapping("/{movieId}")
     fun getMovieById(@PathVariable("movieId") movieId: String): Movie {
@@ -37,6 +37,15 @@ class MovieController(
             throw InvalidMovieIdException(movieId)
         }
     }
+
+    @GetMapping("/{movieId}/reviews")
+    fun getMovieReviews(@PathVariable("movieId") movieId: Long): ResponseEntity<Any> =
+        movieService.getMovieReviews(movieId)
+
+    @GetMapping("/{movieId}/recommendations")
+    fun getMovieRecommendations(@PathVariable("movieId") movieId: Long): ResponseEntity<Any> =
+        movieService.getMovieRecommendations(movieId)
+
 
     @GetMapping("/top")
     fun getFirstMovies(): List<Movie> {

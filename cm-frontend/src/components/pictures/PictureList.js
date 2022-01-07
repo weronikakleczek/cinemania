@@ -9,7 +9,7 @@ const PictureList = ({pictureList, type}) => {
         <div className="movie-list">
         { pictureList && (
                     pictureList.map((movie, index) => (
-                        <Link to={type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`} className="single-movie" key={ movie.id }>
+                        <Link to={type === "movie" ? `/movie/${movie.id}` : `/tv/${movie.id}`} className="single-movie" key={ index }>
                                 <div className="poster-container">
                                     <img 
                                     src={ `https://image.tmdb.org/t/p/original/${movie.poster_path}` } 

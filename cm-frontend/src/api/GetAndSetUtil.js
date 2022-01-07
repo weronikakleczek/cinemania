@@ -34,15 +34,12 @@ const getAndSetFilteredListWithNewPage = (filters, pictureList, setPictureList, 
 }
 
 const getAndSetFilteredListWithNewFilterOrType = (filters, setPictureList, type) => {
-    console.log('Filters:', filters);
-    console.log('Type:', type);
     ApiCall.getFilteredList(filters, 1, type)
     .then(res => {
         return res.data;
     })
     .then(data => {
         setPictureList(data);
-        console.log('Data: ', data);
     })
     .catch(e => {
         console.log(e);
@@ -81,14 +78,147 @@ const getAndSetQueriedListWithNewQuery = async (query, setPictureList) => {
 }
 
 
+const getAndSetSinglePicture =  (id, setMovie, type) => {
+    ApiCall.getSinglePicture(id, type)
+    .then(res => {
+        return res.data;
+     })
+    .then(data => {
+        setMovie(data);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        setMovie(null);
+    });
+}
+
+const getAndSetReviews = (id, set, type) => {
+    ApiCall.getReviews(id, type)
+    .then(res => {
+        return res.data;
+     })
+    .then(data => {
+        set(data);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        set(null);
+    });
+}
 
 
-const SeachUtil = {
+
+const getAndSetTrending = (set, setSize) => {
+    ApiCall.getTrending()
+    .then(res => {
+            return res.data;
+     })
+    .then(data => {
+        set(data);
+        setSize(data.length);
+    })
+    .catch(e => {
+        console.log(e.message);
+    });
+}
+
+
+const getAndSetRecommendations = (id, set, setSize) => {
+    ApiCall.getRecommendedPictures(id)
+    .then(res => {
+        return res.data;
+     })
+    .then(data => {
+        set(data);
+        setSize(data.length);
+    })
+    .catch(e => {
+        console.log('Error: ', e);
+        set(null);
+    });
+}
+
+const getAndSetWatched = (type, username, picture_id, set) => {
+    return ApiCall.getIsWatched(type, username, picture_id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            set(data);
+            return data;
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            set(false);
+        });
+}
+
+const getAndSetScoreAndReview = (type, user, id, setScore, setReview) => {
+    ApiCall.getScore(type, user, id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setScore(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setScore(null);
+        });
+
+    ApiCall.getReview(type, user, id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setReview(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setReview(null);
+        });
+}
+
+const getAndSetRecentPictures = (id, setMovies, setTvs) => {
+    ApiCall.getRecentPictures('movie', id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setMovies(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setMovies(null);
+        });
+
+    ApiCall.getRecentPictures('tv', id)
+        .then(res => {
+            return res.data;
+        })
+        .then(data => {
+            setTvs(data);
+        })
+        .catch(e => {
+            console.log('Error: ', e);
+            setTvs(null);
+        });
+}
+
+
+const SearchUtil = {
     getAndSetGenres,
     getAndSetFilteredListWithNewPage,
     getAndSetFilteredListWithNewFilterOrType,
     getAndSetQueriedListWithNewPage,
-    getAndSetQueriedListWithNewQuery
+    getAndSetQueriedListWithNewQuery,
+    getAndSetSinglePicture,
+    getAndSetReviews,
+    getAndSetTrending,
+    getAndSetRecommendations,
+    getAndSetWatched,
+    getAndSetScoreAndReview,
+    getAndSetRecentPictures
 };
 
-export default SeachUtil;
+export default SearchUtil;

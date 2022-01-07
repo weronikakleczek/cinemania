@@ -41,7 +41,7 @@ const SearchFilter = ({genres, filters, setFilters, type, setType}) => {
             <div className="filter genre">
                 <h2>Gatunek</h2>
                 {genres && (genres.map((val, idx) => (
-                    <div className={filters.has('with_genres') ? (filters.get('with_genres').includes(val.id) ? "single-filter enabled" : "single-filter") : "single-filter"}>
+                    <div key={idx} className={filters.has('with_genres') ? (filters.get('with_genres').includes(val.id) ? "single-filter enabled" : "single-filter") : "single-filter"}>
                         <button onClick={() => addFilter('with_genres', val)}>{val.name}</button>
                     </div>
                 )))}

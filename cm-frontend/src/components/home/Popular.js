@@ -1,34 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import ApiCall from '../../api/ApiCall'
+import React, { useContext, useEffect, useState } from 'react'
+import GetAndSetUtil from '../../api/GetAndSetUtil'
 import {FaArrowAltCircleLeft, FaArrowAltCircleRight} from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import UserContext from '../UserContext';
+import ApiCall from '../../api/ApiCall';
+import not_found from '../../assets/other/404-image-not-found.jpg';
 
 const Popular = () => {
 
-    const [trendingPictures, setTrendingPictures] = useState([])
-    const [pictureListSize, setPictureListSize] = useState(0)
-    const [indexes, setIndexes] = useState([0, 1, 2, 3])
-    const [currentBall, setCurrentBall] = useState(0)
+    const [trendingPictures, setTrendingPictures] = useState([]);
+    const [pictureListSize, setPictureListSize] = useState(0);
+    const [indexes, setIndexes] = useState([0, 1, 2, 3]);
+    const [currentBall, setCurrentBall] = useState(0);
+    const {user, setUser} = useContext(UserContext);
+
 
 
     useEffect(() => {
-        ApiCall.getTrending()
-        .then(res => {
-                return res.data;
-         })
-        .then(data => {
-            setTrendingPictures(data);
-            setPictureListSize(data.length);
-            console.log(data);
-        })
-        .catch(e => {
-            console.log(e.message);
-        });
+
+        const setMoviesAsync = async () => {
+            if (user !== null) {
+                const watchedMovies = await ApiCall.getWatchedMovies(user)
+                    .then(res => {
+                        return res.data;
+                    });
+    
+                if (watchedMovies !== null && watchedMovies.length > 0) {
+                    let array = [];
+                    const fillArray = async (arr) => {
+                        for (let i = 0; i < watchedMovies.length; i++) {
+                            await ApiCall.getRecommendedPictures(watchedMovies[i].id)
+                            .then(res => {
+                                arr = arr.concat(res.data);
+                            })
+                        }
+                        return arr;
+                    }
+                    array = await fillArray(array);
+
+                    const shuffledArray = array.sort((a, b) => 0.5 - Math.random());
+                    const croppedArray = shuffledArray.slice(0, 20);
+                    setTrendingPictures(croppedArray);
+                    setPictureListSize(croppedArray.length);
+                } else {
+                    GetAndSetUtil.getAndSetTrending(setTrendingPictures, setPictureListSize);
+                }
+                    
+            } else {
+                GetAndSetUtil.getAndSetTrending(setTrendingPictures, setPictureListSize);
+            }
+        }
+
+        setMoviesAsync();
+        
     }, [])
 
     const handleLeftArrow = () => {
         let currentMinVal = indexes[0]
-        console.log(currentMinVal)
         if (currentMinVal <= 0) {
             currentMinVal = 20
         }
@@ -36,7 +64,6 @@ const Popular = () => {
         for (let i = 4; i > 0; i--) {
             newIndexes.push(currentMinVal - i)
         }
-        console.log(newIndexes)
         setIndexes(newIndexes)
         setCurrentBall(currentBall === 0 ? 4 : currentBall - 1)
     }
@@ -58,15 +85,20 @@ const Popular = () => {
 
     return (
             <div className="popular-container">
-                <h1>Najpopularniejsze</h1>
+                <h1>{user ? 'Polecane dla Ciebie' : 'Najpopularniejsze' }</h1>
                 <div className="popular-movies">
                     <div className="trending-pictures">
                         <FaArrowAltCircleLeft className="arrow left" onClick={handleLeftArrow}/>
                             {trendingPictures && trendingPictures.map((picture, index) => {
                                 return (
-                                    <Link to={`/${picture.media_type}/${picture.id}`} className="single-movie" key={ picture.id }>
+                                    <Link to={`/${picture.media_type}/${picture.id}`} className="single-movie" key={ index }>
                                         <div className={indexes.includes(index) ? "picture-container active" : "picture-container"} key={index}>
-                                            {indexes.includes(index) && <img src={ `https://image.tmdb.org/t/p/original/${picture.poster_path}` } className="picture" alt="popular"/>}
+                                            {indexes.includes(index) && 
+                                                <img 
+                                                    src={ `https://image.tmdb.org/t/p/original/${picture.poster_path}` } 
+                                                    onError={(event) => event.target.setAttribute("src", not_found)} 
+                                                    className="picture" 
+                                                    alt="popular"/>}
                                         </div>
                                     </Link>
                                 )
@@ -76,7 +108,7 @@ const Popular = () => {
                 </div>
                 <div className="balls">
                     { Array.apply(0, Array(5)).map((val, ind) => {
-                        return <div className={ind === currentBall ? "ball active" : "ball"}></div>;
+                        return <div key={ind} className={ind === currentBall ? "ball active" : "ball"}></div>;
                     })}
                     </div>
             </div>

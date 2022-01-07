@@ -7,16 +7,19 @@ import Search from './components/search/Search';
 import UserContext from './components/UserContext';
 import './styles/styles.css'
 import Register from './components/user/Register';
-import { useState } from 'react';
-import Admin from './components/Admin';
 import Filter from './components/filter/Filter';
 import SingleMovie from './components/pictures/SingleMovie';
 import SingleTvShow from './components/pictures/SingleTvShow';
-import Profile from './components/user/Profile';
+import Profile from './components/user/profile/Profile';
+import useLocalStorage from './hooks/useLocalStorage';
+import Logout from './components/user/Logout';
+import User from "./components/user/User";
+
+
 
 const App = () => {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useLocalStorage("user", null);
 
   return (
     <Router>
@@ -30,8 +33,10 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/user/:id" element={<User />} />
           <Route exact path="/movie/:id" element={<SingleMovie />} />
           <Route exact path="/tv/:id" element={<SingleTvShow />} />
+          <Route exact path="/logout" element={<Logout />} />
         </Routes>
       </UserContext.Provider>
     </Router>

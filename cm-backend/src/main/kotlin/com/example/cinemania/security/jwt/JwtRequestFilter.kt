@@ -30,8 +30,12 @@ class JwtRequestFilter(
         }
 
         val jwt: String = authHeader.substring(7)
-        val username: String = jwtUtil.getUsernameFromToken(jwt)
+        val username: String? = jwtUtil.getUsernameFromToken(jwt)
 
+        if (username == null) {
+            filterChain.doFilter(request, response)
+            return
+        }
 
 
         if (SecurityContextHolder.getContext().authentication == null) {

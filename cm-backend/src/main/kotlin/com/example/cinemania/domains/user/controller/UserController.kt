@@ -5,6 +5,7 @@ import com.example.cinemania.domains.user.model.UserInfoDto
 import com.example.cinemania.domains.user.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.NOT_FOUND
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
@@ -30,7 +31,23 @@ class UserController(val userService: UserService) {
         val auth: Authentication = SecurityContextHolder.getContext().authentication
         return when (auth.name) {
             username -> userService.getUserInfo(username)
-            else -> ResponseEntity.status(NOT_FOUND).body("You can only get info about currently logged in user.")
+            else -> ResponseEntity.status(NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body("You can only get info about currently logged in user.")
         }
     }
+
+    @GetMapping("/friends/find/{query}")
+    fun findUserByQuery(@PathVariable("query") query: String): ResponseEntity<Any> =
+        userService.findUserByQuery(query)
+
+    @PostMapping("/friends/add/{userToAdd}")
+    fun addNewFriend(@PathVariable("userToAdd") username: String): ResponseEntity<Any> =
+        userService.addNewFriend(username)
+
+    @GetMapping("/friends/all")
+    fun getAllFriends(): ResponseEntity<Any> =
+        userService.getAllFriends()
+
+    @GetMapping("/stats")
+    fun getUserStats(): ResponseEntity<Any> =
+        userService.getUserStats()
 }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "../auth/AuthHeader";
 
 const API_URL = "http://localhost:8080/auth/";
 
@@ -35,7 +36,14 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("JwtToken"));
+  return axios.get(API_URL + 'username', { headers: authHeader() })
+  .then(res => {
+    return res.data;
+  })
+  .catch(err => {
+    console.log("Error getting username: ", err.message)
+  })
+  ;
 };
 
 const Auth = {

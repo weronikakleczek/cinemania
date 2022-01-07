@@ -7,10 +7,11 @@ import com.example.cinemania.security.CinemaniaUserDetailsService
 import com.example.cinemania.security.jwt.JwtAuthRequest
 import com.example.cinemania.security.jwt.JwtAuthResponse
 import com.example.cinemania.security.jwt.JwtUtil
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -34,7 +35,7 @@ class AuthController(
             )
         } catch (e: Exception) {
             return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(NOT_FOUND)
                 .body("Invalid username or password, error message: ${e.message}")
         }
         val userDetails = cinemaniaUserDetailsService.loadUserByUsername(authRequest.username)
@@ -47,6 +48,8 @@ class AuthController(
         return ResponseEntity.ok(userService.registerUser(userRegistrationDto))
     }
 
-
-
+    @GetMapping("/username")
+    fun getUsername(): ResponseEntity<Any> = SecurityContextHolder.getContext().authentication
+        ?.let { ResponseEntity.ok(it.name) }
+        ?: ResponseEntity.status(NOT_FOUND).body("Not found.")
 }
