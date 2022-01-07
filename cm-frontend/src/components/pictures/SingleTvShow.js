@@ -22,7 +22,7 @@ const SingleTvShow = () => {
     const [tv, setTv] = useState(null);
     const [isWatched, setIsWatched] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
-    const [buttonText, setButtonText] = useState('Dodaj do obejrzanych!');
+    const [buttonText, setButtonText] = useState('Dodaj do obejrzanych');
     const [showForm, setShowForm] = useState(false);
     const [score, setScore] = useState(null);
     const [review, setReview] = useState(null);
@@ -70,11 +70,11 @@ const SingleTvShow = () => {
         e.preventDefault();
         if (showForm) {
             scroll.scrollToTop();
-            setButtonText('Dodaj do obejrzanych!')
+            setButtonText('Dodaj do obejrzanych')
             setShowForm(false);
         } else {
             scroll.scrollTo(500);
-            setButtonText('Schowaj formularz.')
+            setButtonText('Anuluj');
             setShowForm(true);
         }
     }
@@ -121,8 +121,7 @@ const SingleTvShow = () => {
                         <div className="top-movie-background">
                             <img 
                                 src={ `https://image.tmdb.org/t/p/original/${tv.backdrop_path}` } 
-                                onError={(event) => event.target.setAttribute("src", not_found)} 
-                                className="background" 
+                                className="background"
                                 alt="movie"/> 
                         </div>
                         

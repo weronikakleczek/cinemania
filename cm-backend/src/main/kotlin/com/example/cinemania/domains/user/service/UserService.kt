@@ -6,6 +6,7 @@ import com.example.cinemania.domains.user.repository.FriendshipRepository
 import com.example.cinemania.domains.user.repository.UserRepository
 import com.example.cinemania.domains.user.repository.WatchedMovieRepository
 import com.example.cinemania.domains.user.repository.WatchedTvShowRepository
+import com.example.cinemania.security.CinemaniaUserDetails
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.modelmapper.ModelMapper
@@ -73,9 +74,16 @@ class UserService(
     }
 
     fun findUserByQuery(query: String): ResponseEntity<Any> {
-        val name = SecurityContextHolder.getContext().authentication.name
-        return userRepository.findAllByUsernameContaining(query)
+        val auth = SecurityContextHolder.getContext().authentication
+        val name = auth.name
+        val userId = (auth.principal as CinemaniaUserDetails).user.userId
+        val friendships = friendshipRepository.findAllByUserOneUserIdOrUserTwoUserId(userId, userId)
+        val friendsByQuery = userRepository.findAllByUsernameContaining(query)
+
+        return friendsByQuery
             ?.filter { it.username != name }
+            ?.filter { friendships.none { friendsByQuery.contains(it?.userOne) } }
+            ?.filter { friendships.none { friendsByQuery.contains(it?.userTwo) } }
             ?.let{ ResponseEntity.ok(it) }
             ?: ResponseEntity.status(NOT_FOUND).body("Can not find user with username like $query.")
     }

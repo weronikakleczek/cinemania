@@ -48,6 +48,7 @@ const Friends = () => {
         .catch(err => {
             console.log('Error: ', err);
         })
+        handleFriendsSearchQuery(query);
     }
 
     const handleFriendsSearchQuery = (query) => {
@@ -57,12 +58,9 @@ const Friends = () => {
         } else {
             ApiCall.findFriendsByQuery(query)
             .then(res => {
-                console.log("Query: ", query);
-                console.log("[Q] Res: ", res);
                 return res.data;
             })
             .then(data => {
-                console.log("[Q] Data: ", data);
                 setFriendsByQuery(data);
             })
         }
@@ -76,13 +74,15 @@ const Friends = () => {
                 { friends && (
                     friends.map((val, idx) => (
                         <button onClick={() => {navigate(`/user/${val.userId}`)}}>
-                            <div key={idx}>{ val.username }</div>
+                            <div className="single-friend" key={idx}>
+                                { val.username }
+                            </div>
                         </button>
                     ))
                 )}
             </div>
             <div className="add-friend">
-                Dodaj znajomego:
+                <h2>Dodaj znajomego:</h2>
                 <form>
                     <label>Podaj jego nazwę:</label>
                     <input 
@@ -94,9 +94,12 @@ const Friends = () => {
                 </form>
                 { friendsByQuery && (
                     friendsByQuery.map((val, idx) => (
-                        <button class="friend-to-add-button" onClick={() => handleAdd(val.username)} key={idx}>
-                            {val.username}
-                        </button>
+                        <div className="queried-friend">
+                            <div className="name">{val.username}</div>
+                            <button className="friend-to-add-button" onClick={() => handleAdd(val.username)} key={idx}>
+                                Dodaj
+                            </button>
+                        </div>
                     ))
                 )}
             </div>

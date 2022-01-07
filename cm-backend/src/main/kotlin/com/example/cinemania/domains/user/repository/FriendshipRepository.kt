@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface FriendshipRepository : JpaRepository<Friendship, Long> {
     fun findFriendshipByUserOneUserIdAndUserTwoUserId(userOneUserId: Long, userTwoUserId: Long): Friendship?
-    fun findAllByUserOne(userOne: User): List<Friendship?>
     fun findAllByUserOneOrUserTwo(userOne: User, userTwo: User): List<Friendship?>
+    fun findAllByUserOneUserIdOrUserTwoUserId(userOneUserId: Long, userTwoUserId: Long): List<Friendship?>
 }
