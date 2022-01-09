@@ -2,6 +2,7 @@ package com.example.cinemania.domains.user.controller
 
 import com.example.cinemania.domains.user.model.User
 import com.example.cinemania.domains.user.model.UserInfoDto
+import com.example.cinemania.domains.user.model.UserUpdateInfoDto
 import com.example.cinemania.domains.user.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.NOT_FOUND
@@ -50,4 +51,8 @@ class UserController(val userService: UserService) {
     @GetMapping("/stats")
     fun getUserStats(): ResponseEntity<Any> =
         userService.getUserStats()
+
+    @PutMapping("/update")
+    fun updateUserInfo(@RequestBody userUpdateInfoDto: UserUpdateInfoDto): ResponseEntity<Any> =
+        userService.updateUserInfo(userUpdateInfoDto)
 }
