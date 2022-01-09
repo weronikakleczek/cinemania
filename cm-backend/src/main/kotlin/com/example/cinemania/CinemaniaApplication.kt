@@ -54,7 +54,7 @@ class ApplicationStart(val userRepository: UserRepository,
             1L,
             user,
             123L,
-            12,
+            10,
             "Good!"
         )
 
