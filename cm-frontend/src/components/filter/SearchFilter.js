@@ -50,7 +50,7 @@ const SearchFilter = ({genres, filters, setFilters, type, setType}) => {
             <ScoreFilter filters={filters} setFilters={setFilters} />
             <SortBy filters={filters} setFilters={setFilters} type={type} />
             <div className="filter">
-                <h2>Typ</h2>
+                <h2>Rodzaj</h2>
                 <div 
                 className={type === "movie" ? "single-filter enabled" : "single-filter"}
                 onClick={() => setType("movie")}>
