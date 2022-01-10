@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.client.RestTemplate
 import java.time.Instant
 
@@ -41,6 +42,8 @@ class UserService(
         modelMapper.map(userRegistrationDto, User::class.java)?.copy(
             password = passwordEncoder.encode(userRegistrationDto.password),
             roles = mutableSetOf(Role.USER),
+            watchedMovies = mutableListOf(),
+            watchedTvShows = mutableListOf(),
             creationDate = Instant.now()
         )?.let { userRepository.save(it) }
 
@@ -74,7 +77,13 @@ class UserService(
         }?.let { ResponseEntity.ok(it) } ?: ResponseEntity.status(NOT_FOUND).body("To do") // TODO
     }
 
-    fun findUserByQuery(query: String): ResponseEntity<Any> {
+    fun findUserByQuery(query: String): ResponseEntity<Any> =
+        userRepository.findAllByUsernameContaining(query)
+            ?.filter { it.username != SecurityContextHolder.getContext().authentication.name }
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(NOT_FOUND).body("User not found by query.")
+
+    fun findFriendByQuery(query: String): ResponseEntity<Any> {
         val auth = SecurityContextHolder.getContext().authentication
         val name = auth.name
         val userId = (auth.principal as CinemaniaUserDetails).user.userId
@@ -174,6 +183,49 @@ class UserService(
             ?: ResponseEntity.status(BAD_REQUEST).body("Couldn't update user info.")
     }
 
+    fun getUserNameById(userId: Long): ResponseEntity<Any> =
+        userRepository.findByUserId(userId)
+            ?.let { ResponseEntity.ok(it.username) }
+            ?: ResponseEntity.status(NOT_FOUND).body("User not found.")
+
+    @Transactional
+    fun removeFriend(friendToDeleteId: Long): ResponseEntity<Any> {
+        val auth: Authentication = SecurityContextHolder.getContext().authentication
+        val loggedInUser: User = userRepository.findByUsernameIgnoreCase(auth.name)
+            ?: return ResponseEntity.status(NOT_FOUND).body("User not found.")
+        val friendToRemove: User = userRepository.findByUserId(friendToDeleteId)
+            ?: return ResponseEntity.status(NOT_FOUND).body("User not found.")
+
+        return friendshipRepository
+            .removeFriendshipByUserOneUserIdAndUserTwoUserId(loggedInUser, friendToRemove)
+            ?.let { ResponseEntity.ok("Successfully removed friendship.") }
+            ?: ResponseEntity.status(NOT_FOUND).body("Friendship not found.")
+    }
+
+    @Transactional
+    fun removeAccount(): ResponseEntity<Any> =
+        SecurityContextHolder.getContext().authentication
+            .let { userRepository.findByUsernameIgnoreCase(it.name) }
+            ?.let {
+                friendshipRepository.removeFriendshipByUserOneUserIdOrUserTwoUserId(it, it)
+                watchedMovieRepository.removeWatchedMovieByUser(it)
+                watchedTvShowRepository.removeWatchedTvShowByUser(it)
+                userRepository.removeUserByUserId(it.userId)
+            }
+            ?.let { ResponseEntity.ok("You successfully removed your account.") }
+            ?: ResponseEntity.status(NOT_FOUND).body("User not found.")
+
+    @Transactional
+    fun removeOtherUser(userToDeleteId: Long): ResponseEntity<Any> =
+        userRepository.findByUserId(userToDeleteId)
+            ?.let {
+                friendshipRepository.removeFriendshipByUserOneUserIdOrUserTwoUserId(it, it)
+                watchedMovieRepository.removeWatchedMovieByUser(it)
+                watchedTvShowRepository.removeWatchedTvShowByUser(it)
+                userRepository.removeUserByUserId(it.userId)
+            }
+            ?.let { ResponseEntity.ok("You successfully removed user.") }
+            ?: ResponseEntity.status(NOT_FOUND).body("User not found.")
 }
 
 sealed class PictureType {

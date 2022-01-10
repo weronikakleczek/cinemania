@@ -3,6 +3,7 @@ package com.example.cinemania.domains.user.model
 import com.example.cinemania.domains.user.model.Role
 import java.time.Instant
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Entity(name = "account")
 data class User(
@@ -13,5 +14,11 @@ data class User(
     @Column var firstName: String,
     @Column var lastName: String,
     @Column var creationDate: Instant,
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
+    @Transient
+    val watchedMovies: List<WatchedMovie> = mutableListOf(),
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
+    @Transient
+    val watchedTvShows: List<WatchedTvShow> = mutableListOf(),
     @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>
 )

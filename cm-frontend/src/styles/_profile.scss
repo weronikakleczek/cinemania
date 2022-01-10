@@ -65,6 +65,55 @@
             }
         }
 
+        .admin {
+            h2 {
+                margin: 0 5vh;
+            }
+            .remove-user-button {
+                width: 50%;
+                height: 80%;
+                background: rgba(#222, 0.6);
+                border: none;
+                cursor: pointer;
+                color: #ccc;
+            }
+
+            .remove-user {
+                width: 40%;
+                margin-inline: auto;
+                form {
+                    margin-top: 3vh;
+                    display: flex;
+                    flex-direction: column;
+                }
+                label {
+                    margin: 1vh;
+                }
+
+                input {
+                    color: #eeeeee;
+                    background: rgba(#bbb, 0.2);
+                    border: none;
+                    outline: none;
+                    height: 4vh;
+                    padding: 1vh;
+                    margin-bottom: 5vh;
+                }
+
+                .queried-friend {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    justify-items: center;
+                    align-items: center;
+                    background: rgba(#999, 0.6);
+                    height: 5vh;
+                    margin: 10px 0;
+
+                }
+
+            }
+        }
+
         .friends {
             display: flex;
             justify-content: space-around;
@@ -76,20 +125,25 @@
             .friends-list {
                 display: flex;
                 flex-direction: column;
-                button {
 
-                    background: rgba(#bbb, 0.4);
-                    border: none;
-                    cursor: pointer;
-                    border-radius: 10px;
-                    margin: 10px 0;
                     .single-friend {
+                        background: rgba(#bbb, 0.4);
                         display: flex;
                         align-items: center;
-                        justify-content: center;
-                        height: 5vh;
+                        justify-content: space-around;
+                        height: 10vh;
                         width: 100%;
-                    }
+                        margin: 10px 0;
+                        input {
+                            border: none;
+                            cursor: pointer;
+                            border-radius: 10px;
+
+                            padding: 5px;
+                            height: 4vh;
+                            width: 4vh;
+                        }
+
                 }
 
             }

@@ -50,6 +50,12 @@ const UserInfo = () => {
         setEditMode(false);
     }
 
+    const handleDeleteAccount = () => {
+        ApiCall.deleteMyAccount();
+        setUser(null);
+        navigate('/');
+    }
+
     return (
         <div className="single-option info">
             <button className={editMode ? "edit-mode-button red" : "edit-mode-button"} onClick={() => setEditMode(!editMode)}>
@@ -96,8 +102,11 @@ const UserInfo = () => {
                         <div className="single-info"><div>Data utworzenia:</div> <div>{creationDate}</div> </div>
                     </div>
             }
-
-
+            {!editMode &&
+                <button className="delete-account-button red" onClick={handleDeleteAccount}>
+                    Usuń konto
+                </button>
+            }
         </div>
     )
 }
