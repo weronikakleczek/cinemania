@@ -87,6 +87,14 @@ const getRecentPictures = (type, id) => {
     return axios.get(API_URL + `watched/${type}/recent/${id}`, {});
 }
 
+const updateUserInfo = (firstName, lastName, email, password) => {
+    axios.put(
+        API_URL + `user/update`,
+        {firstName, lastName, email, password},
+        { headers: authHeader() }
+    );
+}
+
 
 
 
@@ -110,7 +118,8 @@ const ApiCall = {
     getIsWatched,
     getScore,
     getReview,
-    getRecentPictures
+    getRecentPictures,
+    updateUserInfo
 };
 
 export default ApiCall;

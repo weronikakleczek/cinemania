@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
@@ -84,7 +85,7 @@ class UserService(
             ?.filter { it.username != name }
             ?.filter { friendships.none { friendsByQuery.contains(it?.userOne) } }
             ?.filter { friendships.none { friendsByQuery.contains(it?.userTwo) } }
-            ?.let{ ResponseEntity.ok(it) }
+            ?.let { ResponseEntity.ok(it) }
             ?: ResponseEntity.status(NOT_FOUND).body("Can not find user with username like $query.")
     }
 
@@ -92,19 +93,20 @@ class UserService(
         val auth: Authentication = SecurityContextHolder.getContext().authentication
         val loggedInUser: User =
             userRepository.findByUsernameIgnoreCase(auth.name)
-            ?: return ResponseEntity.status(NOT_FOUND).body("To do.")//TODO
+                ?: return ResponseEntity.status(NOT_FOUND).body("To do.")//TODO
 
         val numberOfWatchedMovies = getNumberOfWatched(PictureType.Movie, loggedInUser)
         val numberOfWatchedTvShows = getNumberOfWatched(PictureType.TvShow, loggedInUser)
         val numberOfHoursWatching = getHoursSpentWatching(PictureType.Movie, loggedInUser) +
-                                    getHoursSpentWatching(PictureType.TvShow, loggedInUser)
+                getHoursSpentWatching(PictureType.TvShow, loggedInUser)
 
         return ResponseEntity.ok(
             UserStatsDto(
                 numberOfWatchedMovies,
                 numberOfWatchedTvShows,
                 numberOfHoursWatching
-        ))
+            )
+        )
     }
 
     fun getNumberOfWatched(type: PictureType, user: User): Int = when (type) {
@@ -144,15 +146,32 @@ class UserService(
                     JsonParser.parseString(it.body).asJsonObject
                         .get("number_of_episodes").asInt *
                             ((JsonParser.parseString(it.body).asJsonObject
-                        .get("episode_run_time").asJsonArray
-                        .toList()
-                        .getOrNull(0)
-                        ?.asInt) ?: 45)
+                                .get("episode_run_time").asJsonArray
+                                .toList()
+                                .getOrNull(0)
+                                ?.asInt) ?: 45)
                 }
                 ?.reduce { sum, element -> sum + element }
                 ?.let { it / 60 }
                 ?: 0
         }
+    }
+
+    fun updateUserInfo(userUpdateInfoDto: UserUpdateInfoDto): ResponseEntity<Any> {
+        val auth: Authentication = SecurityContextHolder.getContext().authentication
+        val loggedInUser: User? = userRepository.findByUsernameIgnoreCase(auth.name)
+        return loggedInUser
+            ?.copy(
+                firstName = userUpdateInfoDto.firstName ?: loggedInUser.firstName,
+                lastName = userUpdateInfoDto.lastName ?: loggedInUser.lastName,
+                email = userUpdateInfoDto.email ?: loggedInUser.email,
+                password = userUpdateInfoDto.password
+                    ?.let { passwordEncoder.encode(it) }
+                    ?: loggedInUser.password
+            )
+            ?.let { userRepository.save(it) }
+            ?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.status(BAD_REQUEST).body("Couldn't update user info.")
     }
 
 }
