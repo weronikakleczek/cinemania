@@ -8,6 +8,7 @@ import Stats from './Stats';
 import UserInfo from './UserInfo';
 import WatchedMovies from './WatchedMovies';
 import WatchedTvShows from './WatchedTvShows';
+import AdminPage from "./AdminPage";
 
 const Profile = () => {
 
@@ -17,6 +18,7 @@ const Profile = () => {
     const [watchedMovies, setWatchedMovies] = useState([]);
     const [watchedTvShows, setWatchedTvShows] = useState([]);
     const [currentView, setCurrentView] = useState('movies');
+    const [roles, setRoles] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,6 +29,7 @@ const Profile = () => {
         .then(data => {
             setFirstName(data.firstName);
             setLastName(data.lastName);
+            setRoles(data.roles);
         })
         .catch(e => {
             console.log("[Profile] Error getting user info: ", e);
@@ -66,12 +69,13 @@ const Profile = () => {
         <div className="profile-container">
             { firstName && lastName && <h1>Witaj, {capitalize(firstName)} {capitalize(lastName)}!</h1>}
             <div className="nav-and-content">
-                <ProfileNav setCurrentView={setCurrentView} />
+                <ProfileNav setCurrentView={setCurrentView} roles={roles} />
                 { currentView === 'movies'  && <WatchedMovies watchedMovies={watchedMovies}/> }
                 { currentView === 'tvShows' && <WatchedTvShows watchedTvShows={watchedTvShows}/> }
                 { currentView === 'friends' && <Friends/> }
                 { currentView === 'info'    && <UserInfo/> }
                 { currentView === 'stats'    && <Stats/> }
+                { currentView === 'admin' && <AdminPage/>}
             </div>       
         </div>
         :

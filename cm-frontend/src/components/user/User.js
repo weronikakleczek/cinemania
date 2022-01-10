@@ -11,17 +11,25 @@ const User = () => {
 
     const { id } = useParams();
     const {user, setUser} = useContext(UserContext);
+    const [profileUser, setProfileUser] = useState('');
     const [recentMovies, setRecentMovies] = useState([]);
     const [recentTvs, setRecentTvs] = useState([]);
 
     useEffect(() => {
         GetAndSetUtil.getAndSetRecentPictures(id, setRecentMovies, setRecentTvs);
+        ApiCall.getUsernameById(id)
+            .then(res => {
+                console.log(res.data)
+                setProfileUser(res.data);
+            }).catch(e => {
+                console.log("User page, error: ", e.message);
+        });
     }, [])
 
 
     return(
         <div className="user-container">
-            <div className="header">Profil użytkownika {user}</div>
+            <div className="header">{ profileUser && `Profil użytkownika ${profileUser}`}</div>
             <h1>Najwyżej ocenione filmy:</h1>
             <div className="recent-list">
                 {recentMovies && recentMovies.map((movie, index) => (

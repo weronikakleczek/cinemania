@@ -33,6 +33,7 @@ class WebSecurityConfiguration(
             .antMatchers("/watched/**").permitAll()
             .antMatchers("/user/admin").hasRole("ADMIN")
             .antMatchers("/user/only_user").hasRole("USER")
+            .antMatchers("/user/delete/**").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(STATELESS)

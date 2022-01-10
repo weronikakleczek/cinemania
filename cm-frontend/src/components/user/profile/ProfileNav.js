@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProfileNav = ({setCurrentView}) => {
+const ProfileNav = ({setCurrentView, roles}) => {
     
     return (
         <div className="profile-nav">
@@ -9,6 +9,11 @@ const ProfileNav = ({setCurrentView}) => {
             <button className="option" onClick={() => setCurrentView('friends')}>Znajomi          </button>
             <button className="option" onClick={() => setCurrentView('info')}   >Dane             </button>
             <button className="option" onClick={() => setCurrentView('stats')}  >Statystyki       </button>
+            {
+                roles && roles.includes('ADMIN') &&
+                <button className="option" onClick={() => setCurrentView('admin')}  >Panel Admina       </button>
+            }
+
         </div>
     )
 }

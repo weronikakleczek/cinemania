@@ -27,6 +27,10 @@ const getUserInfo = (username) => {
   return axios.get(API_URL + `user/info/${username}`, { headers: authHeader() });
 };
 
+const getUsernameById = (id) => {
+    return axios.get(API_URL + `user/id/${id}`, { headers: authHeader() });
+}
+
 const addToWatched = (dto, type) => {
   return axios.post(API_URL + `watched/${type}/add`, JSON.stringify(dto), {
     headers: {
@@ -57,6 +61,10 @@ const getAllFriends = () => {
 
 const findFriendsByQuery = (query) => {
   return axios.get(API_URL + `user/friends/find/${query}`, { headers: authHeader() });
+}
+
+const findUserByQuery = (query) => {
+    return axios.get(API_URL + `user/find/${query}`, { headers: authHeader() });
 }
 
 const getUserStats = () => {
@@ -95,6 +103,17 @@ const updateUserInfo = (firstName, lastName, email, password) => {
     );
 }
 
+const removeFriendship = (userToRemoveId) => {
+    axios.delete(API_URL + `user/friends/delete/${userToRemoveId}`, { headers: authHeader() });
+}
+
+const deleteMyAccount = () => {
+    axios.delete(API_URL + `user/delete`, { headers: authHeader() });
+}
+
+const deleteUser = (id) => {
+    axios.delete(API_URL + `user/delete/${id}`, { headers: authHeader() });
+}
 
 
 
@@ -105,6 +124,7 @@ const ApiCall = {
     getQueriedList,
     getSinglePicture,
     getUserInfo,
+    getUsernameById,
     addToWatched,
     getWatchedMovies,
     addTvShowToWatched,
@@ -112,6 +132,7 @@ const ApiCall = {
     addNewFriend,
     getAllFriends,
     findFriendsByQuery,
+    findUserByQuery,
     getUserStats,
     getReviews,
     getRecommendedPictures,
@@ -119,7 +140,10 @@ const ApiCall = {
     getScore,
     getReview,
     getRecentPictures,
-    updateUserInfo
+    updateUserInfo,
+    removeFriendship,
+    deleteMyAccount,
+    deleteUser
 };
 
 export default ApiCall;

@@ -1,10 +1,8 @@
 package com.example.cinemania.domains.user.controller
 
 import com.example.cinemania.domains.user.model.User
-import com.example.cinemania.domains.user.model.UserInfoDto
 import com.example.cinemania.domains.user.model.UserUpdateInfoDto
 import com.example.cinemania.domains.user.service.UserService
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,9 +34,17 @@ class UserController(val userService: UserService) {
         }
     }
 
-    @GetMapping("/friends/find/{query}")
+    @GetMapping("/id/{userId}")
+    fun getUsernameById(@PathVariable("userId") userId: Long): ResponseEntity<Any> =
+        userService.getUserNameById(userId);
+
+    @GetMapping("/find/{query}")
     fun findUserByQuery(@PathVariable("query") query: String): ResponseEntity<Any> =
         userService.findUserByQuery(query)
+
+    @GetMapping("/friends/find/{query}")
+    fun findFriendByQuery(@PathVariable("query") query: String): ResponseEntity<Any> =
+        userService.findFriendByQuery(query)
 
     @PostMapping("/friends/add/{userToAdd}")
     fun addNewFriend(@PathVariable("userToAdd") username: String): ResponseEntity<Any> =
@@ -55,4 +61,16 @@ class UserController(val userService: UserService) {
     @PutMapping("/update")
     fun updateUserInfo(@RequestBody userUpdateInfoDto: UserUpdateInfoDto): ResponseEntity<Any> =
         userService.updateUserInfo(userUpdateInfoDto)
+
+    @DeleteMapping("/friends/delete/{friendToDeleteId}")
+    fun removeFriend(@PathVariable("friendToDeleteId") friendToDeleteId: Long): ResponseEntity<Any> =
+        userService.removeFriend(friendToDeleteId)
+
+    @DeleteMapping("/delete")
+    fun removeAccount(): ResponseEntity<Any> =
+        userService.removeAccount()
+
+    @DeleteMapping("/delete/{userToDeleteId}")
+    fun removeOtherUser(@PathVariable("userToDeleteId") userToDeleteId: Long): ResponseEntity<Any> =
+        userService.removeOtherUser(userToDeleteId)
 }

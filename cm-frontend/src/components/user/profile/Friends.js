@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import ApiCall from "../../../api/ApiCall";
+import remove from "../../../assets/icons/remove.png"
+import profile_pic from "../../../assets/icons/profile_pic.png"
 import {useNavigate} from "react-router-dom";
 
 const Friends = () => {
@@ -59,17 +61,24 @@ const Friends = () => {
     }
 
 
+    const handleRemoveFriend = (id) => {
+        ApiCall.removeFriendship(id);
+        let newFriendsList = friends.slice().filter(x => x.userId !== id);
+        setFriends(newFriendsList);
+    }
+
     return (
         <div className="single-option friends">
             <div className="friends-list">
                 <h2>Twoi znajomi:</h2>
                 { friends && (
                     friends.map((val, idx) => (
-                        <button onClick={() => {navigate(`/user/${val.userId}`)}}>
-                            <div className="single-friend" key={idx}>
-                                { val.username }
-                            </div>
-                        </button>
+                        <div className="single-friend" key={idx}>
+                            <input type="image" src={ remove } onClick={() => handleRemoveFriend(val.userId)}/>
+                            { val.username }
+                            <input type="image" src={ profile_pic } onClick={() => {navigate(`/user/${val.userId}`)}}/>
+                        </div>
+
                     ))
                 )}
             </div>
@@ -86,9 +95,9 @@ const Friends = () => {
                 </form>
                 { friendsByQuery && (
                     friendsByQuery.map((val, idx) => (
-                        <div className="queried-friend">
+                        <div className="queried-friend" key={idx}>
                             <div className="name">{val.username}</div>
-                            <button className="friend-to-add-button" onClick={() => handleAdd(val.username)} key={idx}>
+                            <button className="friend-to-add-button" onClick={() => handleAdd(val.username)}>
                                 Dodaj
                             </button>
                         </div>

@@ -37,6 +37,8 @@ class ApplicationStart(val userRepository: UserRepository,
             "first",
             "last",
             Instant.now(),
+            mutableListOf(),
+            mutableListOf(),
             mutableSetOf(Role.ADMIN)
         )
         val user = User(
@@ -47,6 +49,8 @@ class ApplicationStart(val userRepository: UserRepository,
             "first",
             "last",
             Instant.now(),
+            mutableListOf(),
+            mutableListOf(),
             mutableSetOf(Role.USER)
         )
 
