@@ -30,7 +30,7 @@ const User = () => {
     return(
         <div className="user-container">
             <div className="header">{ profileUser && `Profil użytkownika ${profileUser}`}</div>
-            <h1>Najwyżej ocenione filmy:</h1>
+            <h1>Ostatnio obejrzane filmy:</h1>
             <div className="recent-list">
                 {recentMovies && recentMovies.map((movie, index) => (
                             <Link to={ `/movie/${movie.id}` } className="single-movie" key={ index }>
@@ -54,7 +54,7 @@ const User = () => {
                     }
 
             </div>
-            <h1>Najwyżej ocenione seriale:</h1>
+            <h1>Ostatnio obejrzane seriale:</h1>
             <div className="recent-list">
                 { recentTvs && (
                     recentTvs.map((movie, index) => (

@@ -359,6 +359,8 @@ nav #logo-container {
 }
 .movies-container .search-container .search-filter .filter {
   margin: 0 auto;
+  width: 100%;
+  text-align: center;
 }
 .movies-container .search-container .search-filter .filter h2 {
   color: black;
@@ -682,6 +684,9 @@ nav #logo-container {
 }
 .profile-container .nav-and-content .single-option .red {
   background: rgba(241, 65, 65, 0.4);
+}
+.profile-container .nav-and-content .stats h2 {
+  margin-top: 5vh;
 }
 .profile-container .nav-and-content .admin h2 {
   margin: 0 5vh;

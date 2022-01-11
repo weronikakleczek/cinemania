@@ -16,9 +16,9 @@ data class User(
     @Column var creationDate: Instant,
     @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
     @Transient
-    val watchedMovies: List<WatchedMovie> = mutableListOf(),
+    val watchedMovies: List<WatchedMovie>? = mutableListOf(),
     @OneToMany(mappedBy = "user", cascade = [CascadeType.REMOVE])
     @Transient
-    val watchedTvShows: List<WatchedTvShow> = mutableListOf(),
+    val watchedTvShows: List<WatchedTvShow>? = mutableListOf(),
     @ElementCollection(fetch = FetchType.EAGER) @Enumerated(value = EnumType.STRING) var roles: MutableSet<Role>
 )
