@@ -41,7 +41,7 @@ const SingleTvShow = () => {
                 }
             })
 
-        if (id) {
+        if (user) {
             ApiCall.getUserInfo(user)
             .then(res => {
                 return res.data;

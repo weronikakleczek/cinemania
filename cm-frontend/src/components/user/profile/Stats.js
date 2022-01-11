@@ -21,7 +21,7 @@ const Stats = () => {
 
     return (
         <div className="single-option stats">
-        User stats
+        <h2>Twoje statystyki</h2>
         { userStats && 
         <div className="stats-list">
             <div className="single-stat"><div>Obejrzane Filmy:</div> <div>{ userStats.movies }</div></div>
