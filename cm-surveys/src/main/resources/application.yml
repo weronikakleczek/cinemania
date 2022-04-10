@@ -1,0 +1,47 @@
+# Server Config
+server:
+  port: 8020
+  servlet:
+    context-path: /surveys
+
+# Spring Config
+spring:
+
+  # Application
+  application:
+    name: surveys
+
+  # PostgreSQL Credentials
+  datasource:
+    url: jdbc:postgresql://localhost:5434/surveys
+    username: postgres
+    password: password
+
+  # Hibernate configuration
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
+  #Gson
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+
+  # Kafka
+  kafka:
+    bootstrap-servers: localhost:9092
+
+# Eureka Config
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
