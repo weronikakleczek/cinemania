@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: apigw
+  cloud:
+    gateway:
+      routes:
+        - id: pictures
+          uri: lb://PICTURES
+          predicates:
+            - Path=/pictures/**
+        - id: surveys
+          uri: lb://SURVEYS
+          predicates:
+            - Path=/surveys/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
