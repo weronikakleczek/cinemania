@@ -20,7 +20,6 @@ class UtilClasses(
     fun getGson(): Gson = Gson()
 
     @Bean
-    @LoadBalanced
     fun getRestTemplate(): RestTemplate = RestTemplateBuilder()
         .rootUri(defaultUri)
         .build()

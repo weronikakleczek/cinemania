@@ -1,53 +1,11 @@
-# Server Config
-server:
-  port: 8010
-  servlet:
-    context-path: /pictures
-
-# Spring Config
 spring:
-
-  # Application
   application:
     name: pictures
-
-  # PostgreSQL Credentials
-  datasource:
-    url: jdbc:postgresql://localhost:5433/pictures
-    username: postgres
-    password: password
-
-  # Hibernate configuration
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        show_sql: true
-        use_sql_comments: true
-        format_sql: true
-
-  # Gson
-  mvc:
-    converters:
-      preferred-json-mapper: gson
-
-  # Kafka
-  kafka:
-    bootstrap-servers: localhost:9092
-
-# Eureka Config
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
+  cloud:
+    config:
+      uri: localhost:8888
 
 # API
 api_base_uri: https://api.themoviedb.org/3
 api_key: ${api_key}
-
 
