@@ -44,7 +44,9 @@ class MovieController(
     @GetMapping("/{movieId}")
     fun getMovieById(@PathVariable("movieId") movieId: String): Movie {
         try {
-            val movie = restTemplate.getForEntity("$defaultUri/movie/$movieId?api_key=$apiKey&language=pl-PL", String::class.java)
+            val s = "$defaultUri/movie/$movieId?api_key=$apiKey&language=pl-PL"
+            println("Here: $s")
+            val movie = restTemplate.getForEntity(s, String::class.java)
             return gson.fromJson(movie.body, Movie::class.java)
         } catch (e: Exception) {
             throw InvalidMovieIdException(movieId)

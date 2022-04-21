@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "api_base_uri",
+      "type": "java.lang.String",
+      "description": "Description for api_base_uri."
+    },
+    {
+      "name": "api_key",
+      "type": "java.lang.String",
+      "description": "Description for api_key."
+    }
+  ] }
