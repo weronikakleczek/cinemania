@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = ["http://localhost:3000"])
+@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
 class AuthController(
     val authenticationManager: AuthenticationManager,
     val cinemaniaUserDetailsService: CinemaniaUserDetailsService,
@@ -25,6 +25,7 @@ class AuthController(
 ) {
 
     @PostMapping("/authenticate")
+    @CrossOrigin
     fun createAuthenticationToken(@RequestBody authRequest: JwtAuthRequest): ResponseEntity<Any> {
         try {
             authenticationManager.authenticate(
