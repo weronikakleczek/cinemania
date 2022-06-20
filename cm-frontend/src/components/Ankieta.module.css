@@ -22,6 +22,7 @@ form {
         select, textarea */
 .form_control input,
 .form_control select,
+.form_control option,
 .form_control textarea {
   border: 1px solid #777;
   border-radius: 2px;
@@ -42,7 +43,8 @@ form {
 
 /* Styling Button */
 button {
-  background-color: #05c46b;
+  background-color: #ece9dc;
+  color: rgb(44, 39, 39);
   border: 1px solid #777;
   border-radius: 2px;
   font-family: inherit;
@@ -51,4 +53,22 @@ button {
   width: 100%;
   margin-top: 50px;
   margin-bottom: 20px;
+}
+
+.buttonContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.download {
+  border: 1px solid #777;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 21px;
+  display: block;
+  width: 20vw;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  height: 7vh;
 }
