@@ -22,8 +22,43 @@ const Quiz = ({ list, setList }) => {
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    const newSurvey = { firstName, lastName };
+    const newSurvey = { firstName, lastName, age, status, recommend, tvMoviesPreference, cinemaTime, subscriptions, hoursWeekly, popcorn, genres, favMovie, favTv,changes };
     setList((prevState) => [...prevState, newSurvey]);
+
+    
+    
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('age', age);
+    localStorage.setItem('status', status);
+    localStorage.setItem('recommend', recommend);
+    localStorage.setItem('tvMoviesPreference', tvMoviesPreference);
+    localStorage.setItem('cinemaTime', cinemaTime);
+    localStorage.setItem('subscriptions', subscriptions);
+    localStorage.setItem('hoursWeekly', hoursWeekly);
+    localStorage.setItem('popcorn', popcorn);
+    localStorage.setItem('genres', genres);
+    localStorage.setItem('favMovie', favMovie);
+    localStorage.setItem('favTv', favTv);
+    localStorage.setItem('changes', changes);
+
+    
+    
+    console.log(localStorage.getItem('firstName'))
+    console.log(localStorage.getItem('lastName'))
+    console.log(localStorage.getItem('age'))
+    console.log(localStorage.getItem('status'))
+    console.log(localStorage.getItem('recommend'))
+    console.log(localStorage.getItem('tvMoviesPreference'))
+    console.log(localStorage.getItem('cinemaTime'))
+    console.log(localStorage.getItem('subscriptions'))
+    console.log(localStorage.getItem('hoursWeekly'))
+    console.log(localStorage.getItem('popcorn'))
+    console.log(localStorage.getItem('genres'))
+    console.log(localStorage.getItem('favMovie'))
+    console.log(localStorage.getItem('favTv'))
+    console.log(localStorage.getItem('changes'))
+
     console.log(newSurvey);
   };
 
@@ -41,6 +76,7 @@ const Quiz = ({ list, setList }) => {
           <input
             type="text"
             id="first-name"
+            value={firstName}
             placeholder="Podaj swoje imię"
             onChange={(e) => setFirstName(e.target.value)}
           />
@@ -76,11 +112,11 @@ const Quiz = ({ list, setList }) => {
             Która opcja najlepiej Cię opisuje?
           </label>
 
-          <select name="role" id="role">
+          <select name="role" id="role" onChange={(e) => setStatus(e.target.value)}>
             <option value="student">Student</option>
-            <option value="intern">Stażysta</option>
-            <option value="professional">Profesjonalista</option>
-            <option value="other">Inne</option>
+            <option value="stażysta">Stażysta</option>
+            <option value="Profesjonalista">Profesjonalista</option>
+            <option value="inne">Inne</option>
           </select>
         </div>
 
@@ -88,15 +124,15 @@ const Quiz = ({ list, setList }) => {
           <label>Czy poleciłbyś stronę Cinemania swoim znajomym?</label>
 
           <label for="recommed-1">
-            <input type="radio" id="recommed-1" name="recommed" />
+            { <input type="radio" id="recommed-1" name="recommed" onChange={() => setRecommend("tak")}/> }
             Tak
           </label>
           <label for="recommed-2">
-            <input type="radio" id="recommed-2" name="recommed" />
+            <input type="radio" id="recommed-2" name="recommed" onChange={() => setRecommend("nie")} />
             Nie
           </label>
           <label for="recommed-3">
-            <input type="radio" id="recommed-3" name="recommed" />
+            <input type="radio" id="recommed-3" name="recommed" onChange={() => setRecommend("może")} />
             Może
           </label>
         </div>
@@ -105,15 +141,15 @@ const Quiz = ({ list, setList }) => {
           <label>Czy wolisz filmy, czy seriale?</label>
 
           <label for="option-1">
-            <input type="radio" id="option-1" name="recommed" />
+            <input type="radio" id="option-1" name="recommed1" onChange={() => setTvMoviesPreference("Filmy")} />
             Filmy
           </label>
           <label for="option-2">
-            <input type="radio" id="option-2" name="recommed" />
+            <input type="radio" id="option-2" name="recommed1" onChange={() => setTvMoviesPreference("Seriale")} />
             Seriale
           </label>
           <label for="option-3">
-            <input type="radio" id="option-3" name="recommed" />
+            <input type="radio" id="option-3" name="recommed1" onChange={() => setTvMoviesPreference("Ciężko powiedzieć")} />
             Ciężko powiedzieć
           </label>
         </div>
@@ -123,7 +159,7 @@ const Quiz = ({ list, setList }) => {
             Ile razy w zeszłym roku byłeś w kinie?
           </label>
 
-          <input type="number" id="hours" placeholder="Podaj liczbę godzin" />
+          <input type="number" id="hours" placeholder="Podaj liczbę godzin"  onChange={(e) => setCinemaTime(e.target.value)}/>
         </div>
 
         <div className={styles.form_control}>
@@ -131,7 +167,7 @@ const Quiz = ({ list, setList }) => {
             Ile subskrypcji na serwisach streamingowych posiadasz?
           </label>
 
-          <input type="number" id="hours" placeholder="Podaj liczbę godzin" />
+          <input type="number" id="hours" placeholder="Podaj liczbę godzin" onChange={(e) => setSubscriptions(e.target.value)} />
         </div>
 
         <div className={styles.form_control}>
@@ -139,22 +175,22 @@ const Quiz = ({ list, setList }) => {
             Ile godzin tygodniowo poświęcasz na oglądanie filmów i seriali?
           </label>
 
-          <input type="number" id="hours" placeholder="Podaj liczbę godzin" />
+          <input type="number" id="hours" placeholder="Podaj liczbę godzin" onChange={(e) => setHoursWeekly(e.target.value)} />
         </div>
 
         <div className={styles.form_control}>
           <label>Czy kiedy jesteś w kinie, kupujesz popcorn?</label>
 
           <label for="option-1">
-            <input type="radio" id="option-1" name="recommed" />
+            <input type="radio" id="option-1" name="recommed2" onChange={() => setPopcorn("Tak")} />
             Tak
           </label>
           <label for="option-2">
-            <input type="radio" id="option-2" name="recommed" />
+            <input type="radio" id="option-2" name="recommed2" onChange={() => setPopcorn("Nie")} />
             Nie
           </label>
           <label for="option-3">
-            <input type="radio" id="option-3" name="recommed" />
+            <input type="radio" id="option-3" name="recommed2" onChange={() => setPopcorn("Różnie")} />
             Różnie
           </label>
         </div>
@@ -197,6 +233,7 @@ const Quiz = ({ list, setList }) => {
             type="text"
             id="fav-movie"
             placeholder="Podaj swój ulubiony film"
+            onChange={(e) => setFavMovie(e.target.value)}
           />
         </div>
 
@@ -209,6 +246,7 @@ const Quiz = ({ list, setList }) => {
             type="text"
             id="fav-tv"
             placeholder="Podaj swój ulubiony serial"
+            onChange={(e) => setFavTv(e.target.value)}
           />
         </div>
 
@@ -219,6 +257,7 @@ const Quiz = ({ list, setList }) => {
             name="comment"
             id="comment"
             placeholder="Wpisz propozycje tutaj"
+            onChange={(e) => setChanges(e.target.value)}
           ></textarea>
         </div>
 

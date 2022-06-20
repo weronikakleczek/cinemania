@@ -22,6 +22,7 @@ form {
         select, textarea */
 .form_control input,
 .form_control select,
+.form_control option,
 .form_control textarea {
   border: 1px solid #777;
   border-radius: 2px;
