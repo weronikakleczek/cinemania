@@ -55,6 +55,30 @@ class ApplicationStart(val userRepository: UserRepository,
             mutableListOf(),
             mutableSetOf(Role.USER)
         )
+        val researcher = User(
+            3L,
+            "researcher",
+            "researcher@gmail.com",
+            passwordEncoder.encode("researcher"),
+            "first",
+            "last",
+            Instant.now(),
+            mutableListOf(),
+            mutableListOf(),
+            mutableSetOf(Role.RESEARCHER)
+        )
+        val critic = User(
+            4L,
+            "critic",
+            "critic@gmail.com",
+            passwordEncoder.encode("critic"),
+            "first",
+            "last",
+            Instant.now(),
+            mutableListOf(),
+            mutableListOf(),
+            mutableSetOf(Role.CRITIC)
+        )
 
         val watchedMovie = WatchedMovie(
             1L,
@@ -64,7 +88,7 @@ class ApplicationStart(val userRepository: UserRepository,
             "Good!"
         )
 
-        userRepository.saveAll(listOf(admin, user))
+        userRepository.saveAll(listOf(admin, user, researcher, critic))
         watchedMovieRepository.save(watchedMovie)
     }
 }
