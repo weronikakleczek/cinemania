@@ -14,6 +14,7 @@ import Profile from './components/user/profile/Profile';
 import useLocalStorage from './hooks/useLocalStorage';
 import Logout from './components/user/Logout';
 import User from "./components/user/User";
+import Ankieta from "./components/Ankieta";
 
 
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route exact path="/movie/:id" element={<SingleMovie />} />
           <Route exact path="/tv/:id" element={<SingleTvShow />} />
           <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/ankieta" element={<Ankieta />} />
         </Routes>
       </UserContext.Provider>
     </Router>

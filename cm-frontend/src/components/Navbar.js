@@ -27,6 +27,7 @@ const Navbar = () => {
                 </div>
                 <ul>
                     <Link to="/search"><li className="white">Wyszukaj</li></Link>
+                    <Link to="/ankieta"><li className="white">Ankieta</li></Link>
                     <Link to="/filter"><li className="white">Kategorie</li></Link>
                     <Link to="/top"><li className="white">Top 100</li></Link>
                     {
